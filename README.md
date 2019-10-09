@@ -1,5 +1,5 @@
 # Dream RL Agents
-### What is Dream RL Agents?
+## What is Dream RL Agents?
 - An open source library for deep reinforcement learning agents
 - Code written to be easy to understand and learn from
 - Implements Deep Q Learning, Deep Deterministic Policy Gradients and Proximal Policy Optimization
@@ -7,10 +7,16 @@
 - "Solves" OpenAI's gym environments in example files
 - Not meant for production. Can contain subtle bugs. Use OpenAI's baselines instead.
 
-### Agents
+## Agents
 
-#### Deep Q Learning agent
+### Deep Q Learning agent
 
-#### Deep Deterministic Policy Gradient agent
+#### Example of a trained agent
 
-#### Proximal Policy Optimization agent
+#### Article
+
+#### How to use
+
+### Deep Deterministic Policy Gradient agent
+
+### Proximal Policy Optimization agent
