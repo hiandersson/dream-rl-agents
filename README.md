@@ -11,11 +11,9 @@
 
 ### Deep Q Learning agent
 
-#### Example of a trained agent
-
 ![Trained agent](/Checkpoints/cartpole_v1_enjoy.gif)
 
-#### Article
+[a relative link]/Documentation/DQN.md)
 
 #### How to use
 
