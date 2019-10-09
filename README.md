@@ -15,7 +15,7 @@
 
 ![Trained agent](/Checkpoints/cartpole_v1_enjoy.gif)
 
-[a relative link](/Documentation/DQN.md)
+[Article about Deep Q Learning](/Documentation/DQN.md)
 
 #### How to use
 
