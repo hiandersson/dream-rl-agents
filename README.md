@@ -62,7 +62,7 @@ env.close()
 
 ![Trained agent](/Checkpoints/lunarlander-v2-enjoy.gif)
 
-[Article about Deep Q Learning](/Documentation/DDPG.md)
+[Article about Deep Deterministic Policy Gradients](/Documentation/DDPG.md)
 
 #### How to use
 
