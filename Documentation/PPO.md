@@ -4,13 +4,13 @@
 
 Policy gradient methods directly takes in the state of the environment and outputs a probability distribution for an action. Compared to off policy methods like DQN, policy gradient methods does not use a replay buffer to sample from.
 
-A policy gradient method can only sample episodic tasks because we need to know the future discounted reward in each step when we update our policy. When we update our neural network weights we look at each state-action pair in the episode an up the probability for actions leading to a higher future reward and down the probability for actions leading to a lower future reward. Since we want to maximize the rewards we use gradient ascent when we update our neural network.
+A policy gradient method can only sample episodic tasks because we need to know the future discounted reward in each step when we update our policy. We call sequence of state-action pairs in an episode a trajectory. When we update our neural network weights we look at each state-action pair in the trajectory an up the probability for actions leading to a higher future reward and down the probability for actions leading to a lower future reward. Since we want to maximize the rewards we use gradient ascent when we update our neural network.
 
-Policy gradient methods are similar to supervised learning in that when we have collected the whole episode and calculated the future discounted reward for each step, we have created a setup that is similar to supervised learning of X, Y target pairs (say training a convolutional neural network to regonize images).
+Policy gradient methods are similar to supervised learning in that when we have collected a trajectory and calculated the future discounted reward for each step, we have created a setup that is similar to supervised learning of X, Y target pairs (say training a convolutional neural network to regonize images).
 
 #### REINFORCE algorithm
 
-The goal of a policy gradient method is to maximize the future expected return. We can begin with set this up as the follow equation, calculating the expectation of rewards:
+The goal of a policy gradient method is to maximize the future expected return. We can begin with set this up as the follow equation, calculating the expectation of rewards in a trajectory:
 
 ![Problem setup](/Documentation/REINFORCE_Goal.png)
 
