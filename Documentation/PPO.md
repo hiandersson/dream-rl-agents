@@ -10,10 +10,11 @@ Policy gradient methods are similar to supervised learning in that when we have 
 
 #### REINFORCE algorithm
 
-The goal of a policy gradient method is to maximize the future expected return. We can begin with set this up as the follow equation:
+The goal of a policy gradient method is to maximize the future expected return. We can begin with set this up as the follow equation, calculating the expectation of rewards:
 
 ![Problem setup](/Documentation/REINFORCE_Goal.png)
 
+- Tau is a trajectory, a sequence of state action pairs collected during an episode
 - U(theta) is the expected return
 - P(tau;theta) is the probability of the trajectory
 - R(tau) is the return from the trajectory
