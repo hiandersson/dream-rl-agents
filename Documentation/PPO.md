@@ -7,3 +7,5 @@ Policy gradient methods directly takes in the state of the environment and outpu
 A policy gradient method can only sample episodic tasks because we need to know the future discounted reward in each step when we update our policy. When we update our neural network weights we look at each state-action pair in the episode an up the probability for actions leading to a higher future reward and down the probability for actions leading to a lower future reward. Since we want to maximize the rewards we use gradient ascent when we update our neural network.
 
 Policy gradient methods are similar to supervised learning in that when we have collected the whole episode and calculated the future discounted reward for each step, we have created a setup that is similar to supervised learning of X, Y target pairs (say training a convolutional neural network to regonize images).
+
+#### REINFORCE algorithm
