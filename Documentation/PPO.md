@@ -9,3 +9,5 @@ A policy gradient method can only sample episodic tasks because we need to know 
 Policy gradient methods are similar to supervised learning in that when we have collected the whole episode and calculated the future discounted reward for each step, we have created a setup that is similar to supervised learning of X, Y target pairs (say training a convolutional neural network to regonize images).
 
 #### REINFORCE algorithm
+
+![Problem setup](/Documentation/REINFORCE_Goal)
