@@ -18,3 +18,5 @@ The goal of a policy gradient method is to maximize the future expected return. 
 - U(theta) is the expected return
 - P(tau;theta) is the probability of the trajectory, depending on theta
 - R(tau) is the return from the trajectory
+
+The goal is to find the weights of theta that maximizes the future expected return.
