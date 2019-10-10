@@ -21,6 +21,5 @@ The goal of a policy gradient method is to maximize the future expected return. 
 
 The goal is to find the weights of theta that maximizes the future expected return.
 
-We can estimate the gradient that we use to perform gradient ascent this way.
-Consider that we have collected one trajectory:
+We can estimate the gradient that we use to perform gradient ascent this way. Consider that we have collected one trajectory:
 ![Gradient](/Documentation/REINFORCE_Gradient.png)
