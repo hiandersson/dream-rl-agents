@@ -27,6 +27,10 @@ Consider that we have collected **one** trajectory, we can **estimate** the grad
 
 - R(tau) is the cumulative reward from the trajectory
 - Policy pi (at | st) is the probability of selecting an action **a** in state **t**. The policy is parameterized by theta which is the neural network.
-- The full gradient statement takes the log probability of selecting an action **a** in state **t**.
+- The full gradient statement within the sum takes the **log probability** of selecting an action **a** in state **t** times the cumulative reward for the trajectory.
 
 If we take a step in the direction of the gradient when we update the neural network, we will increase the log probability of taking action **a** in that step.
+
+As a final step for the REINFORCE algorithm where we have collected all trajectoris can be written as:
+
+![Gradient](/Documentation/REINFORCE_Gradients.png)
