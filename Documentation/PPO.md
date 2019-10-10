@@ -25,3 +25,5 @@ Consider that we have collected **one** trajectory, we can **estimate** the grad
 
 ![Gradient](/Documentation/REINFORCE_Gradient.png)
 
+- Policy pi (at | st) is the probability of selecting an action a in state t. The polich parameterized by theta which is the neural network.
+- R(tau) is the cumulative reward from the trajectory
