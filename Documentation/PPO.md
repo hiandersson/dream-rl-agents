@@ -10,4 +10,4 @@ Policy gradient methods are similar to supervised learning in that when we have 
 
 #### REINFORCE algorithm
 
-![Problem setup](/Documentation/REINFORCE_Goal)
+![Problem setup](/Documentation/REINFORCE_Goal.png)
