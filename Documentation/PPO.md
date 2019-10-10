@@ -27,5 +27,5 @@ Consider that we have collected **one** trajectory, we can **estimate** the grad
 
 - R(tau) is the cumulative reward from the trajectory
 - Policy pi (at | st) is the probability of selecting an action **a** in state **t**. The policy is parameterized by theta which is the neural network.
-- The full gradient statement takes the log of the probability, policy pi (at | st)
+- The full gradient statement takes the log probability of selecting an action **a** in state **t**.
 
