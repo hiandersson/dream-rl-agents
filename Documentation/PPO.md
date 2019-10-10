@@ -1,3 +1,7 @@
 # Proximal Policy Optimization
 
-#### Vanilla 
+#### Policy gradient methods
+
+Policy gradient methods directly takes in the state of the environment and outputs a probability distribution for an action. Compared to off policy methods like DQN, policy gradient methods does not use a replay buffer to sample from.
+
+A policy gradient method can only sample episodic tasks because we need to know the future discounted reward in each step when we update our policy. When we update our neural network weights we look at each state-action pair in the episode an up the probability for actions leading to a higher future reward and down the probability for actions leading to a lower future reward.
