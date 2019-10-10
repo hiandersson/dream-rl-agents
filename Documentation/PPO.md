@@ -34,3 +34,5 @@ If we take a step in the direction of the gradient when we update the neural net
 As a final step for the REINFORCE algorithm where we have collected all trajectoris can be written as:
 
 ![Gradient](/Documentation/REINFORCE_Gradients.png)
+
+- m is the number of trajectories
