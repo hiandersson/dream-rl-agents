@@ -16,5 +16,5 @@ The goal of a policy gradient method is to maximize the future expected return. 
 
 - Tau is a trajectory, a sequence of state action pairs collected during an episode
 - U(theta) is the expected return
-- P(tau;theta) is the probability of the trajectory
+- P(tau;theta) is the probability of the trajectory, depending on theta
 - R(tau) is the return from the trajectory
