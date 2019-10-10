@@ -20,3 +20,5 @@ The goal of a policy gradient method is to maximize the future expected return. 
 - R(tau) is the return from the trajectory
 
 The goal is to find the weights of theta that maximizes the future expected return.
+
+![Gradient](/Documentation/REINFORCE_Gradient.png)
