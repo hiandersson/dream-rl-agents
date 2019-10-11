@@ -20,10 +20,10 @@ config = AgentConfig(
 agent = REINFORCEAgent(config)
 
 # Create a runner that runs the agent in the environment
-runner = Runner(agent, save_best_score='Checkpoints/acrobot_v1_reinforce.ch')
+runner = Runner(agent, save_best_score='Checkpoints/acrobot_v1_reinforce_train.ch')
 
 # Run the agent
-score = runner.run_single_probability_trajectory()
+score, checkpoint = runner.run_single_probability_trajectory()
 
 # Visualize the score
 score.visualize()

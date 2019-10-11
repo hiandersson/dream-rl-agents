@@ -229,7 +229,7 @@ class Runner():
 
             # save checkpoint
             if found_best_score != None:
-                best_checkpoint = self.agent.get_checkpoint(self.agent.config)
+                best_checkpoint = self.agent.get_checkpoint()
                 if self.save_best_score != None:
                     self.agent.save(self.save_best_score)
 

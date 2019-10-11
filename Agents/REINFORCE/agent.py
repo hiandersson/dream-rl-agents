@@ -29,11 +29,11 @@ class REINFORCEAgent():
         self.policy = Policy(state_size=state_size, action_size=action_size, fc1_units=self.config.fc1_units).to(self.config.device) 
         self.optimizer = optim.Adam(self.policy.parameters(), lr=self.config.learning_rate)
 
-    def get_checkpoint(self, agent_config):
+    def get_checkpoint(self):
 
         checkpoint = {
             'policy': self.policy.state_dict(),
-            'agent_config': agent_config.get_dict(),
+            'agent_config': self.config.get_dict(),
         }
 
         return checkpoint
