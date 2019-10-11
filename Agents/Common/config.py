@@ -1,6 +1,7 @@
 import random
 import torch
 import numpy as np
+from dict2obj import Dict2Obj
 
 class AgentConfig():
     def __init__(self, 
@@ -103,3 +104,22 @@ class AgentConfig():
         self.ppo_beta = ppo_beta
         self.ppo_tmax = ppo_tmax
         self.ppo_gradientdescent_steps_per_epoch = ppo_gradientdescent_steps_per_epoch
+
+    def get_dict(self):
+
+        agent_config_dict = vars(self).copy()
+
+        del agent_config_dict['parallelEnv']
+        del agent_config_dict['env']
+        del agent_config_dict['device']
+
+        return agent_config_dict
+
+    def from_dict_to_config(self, dict_object):
+
+        agent_config_new = Dict2Obj(dict_object)
+        agent_config_new.env = self.env
+        agent_config_new.parallelEnv = self.parallelEnv
+        agent_config_new.device = self.device
+
+        return agent_config_new

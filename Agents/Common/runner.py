@@ -40,7 +40,7 @@ class Runner():
                 if done:
                     break 
 
-            # decrease epsilon
+            # post episode handling by agent
             self.agent.post_episode()
 
             # handle scoring
@@ -169,7 +169,6 @@ class Runner():
 
         score = Score(target_average=self.agent.config.target_average, window_size=100, total_episodes=self.agent.config.n_episodes)
 
-        mean_rewards = []
         for i_episode in range(1, self.agent.config.n_episodes+1):
 
             # collect trajectories
@@ -190,3 +189,48 @@ class Runner():
                 self.agent.save(self.save_best_score)
 
         return score
+
+    def run_single_probability_trajectory(self):
+
+        score = Score(target_average=self.agent.config.target_average, window_size=100, total_episodes=self.agent.config.n_episodes, verbose=self.verbose, pbar=self.pbar)
+
+        best_checkpoint = None
+
+        for i_episode in range(1, self.agent.config.n_episodes+1):
+
+            # reset envirnoment
+            state = self.agent.env.reset()
+            score.reset_episode()
+
+            # run the episode
+            saved_log_probabilities = []
+            saved_rewards = []
+            for t in range(self.agent.config.max_t):
+
+                # log probability for the action
+                action, log_probability = self.agent.act(state)
+                saved_log_probabilities.append(log_probability)
+
+                # step
+                next_state, reward, done, _ = self.agent.env.step(action)
+                saved_rewards.append(reward)
+                state = next_state
+
+                # collect reward
+                score.add_reward(reward)
+                if done:
+                    break
+
+            #  learn
+            self.agent.learn(saved_log_probabilities, saved_rewards) 
+
+            # handle scoring
+            found_best_score = score.post_episode(i_episode)
+
+            # save checkpoint
+            if found_best_score != None:
+                best_checkpoint = self.agent.get_checkpoint(self.agent.config)
+                if self.save_best_score != None:
+                    self.agent.save(self.save_best_score)
+
+        return score, best_checkpoint

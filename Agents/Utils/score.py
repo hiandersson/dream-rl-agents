@@ -19,7 +19,7 @@ class Score():
         self.scores_window = deque(maxlen=self.window_size) 
         self.target_average_reached = False
         if self.verbose == 1 and self.pbar is None:
-            self.pbar = tqdm(total=self.total_episodes, desc = "Learning:{:03}".format(self.bar_position), ncols = 128)
+            self.pbar = tqdm(total=self.total_episodes, desc = "Learning", ncols = 128)
         self.target_reached_in = "---"
         self.best_score = -np.inf
 

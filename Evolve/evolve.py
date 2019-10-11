@@ -2,7 +2,6 @@
 # externals
 import hashlib
 from random import randint
-import pprint
 import time
 import concurrent.futures
 from tqdm import tqdm
@@ -19,6 +18,7 @@ class genomeResult:
 	def __init__(self):
 		self.genome = {}
 		self.testScore = -1
+		self.testCheckpoint = None
 
 class genomeInPopulation:
 	def __init__(self, evolverConfig, genomeUID, geneCreationClass):
@@ -161,7 +161,7 @@ def genomeThreadedSubmit(genomeArgs):
 	testResult = genomeResult()
 	testResult.genome = genomeArgs['genome']
 	testResult.genomeUID = genomeArgs['genomeUID']
-	testResult.testScore = score_genome(genomeArgs['genome'], genomeArgs['episodes'], genomeArgs['pbar'])
+	testResult.testScore, testResult.testCheckpoint = score_genome(genomeArgs['genome'], genomeArgs['episodes'], genomeArgs['pbar'])
 
 	return testResult
 
@@ -404,12 +404,11 @@ class evolver:
 
 		bestInGenerationHistory = []
 
-		maxRandom = 99
-		partRandom = int(99 / generations)
-
 		afterInitGenerations = generations - 1
 		afterInitTotal = (self.evolverConfig['retainSize'] * afterInitGenerations) + (self.evolverConfig['mutateOneGeneRandom'] * afterInitGenerations) + (self.evolverConfig['mutateTwoGenesRandom'] * afterInitGenerations) + (self.evolverConfig['crossoverOneGene'] * afterInitGenerations) + (self.evolverConfig['crossOverTwoGenes'] * afterInitGenerations) + (self.evolverConfig['mutateOneGeneClose'] * afterInitGenerations)
 		totalGenes = self.evolverConfig['populationSize'] + afterInitTotal
+
+		# Evolution
 
 		for i in range(generations):
 
@@ -423,14 +422,19 @@ class evolver:
 			print("\nWinning genome id {} - score {:.4} - gene inception '{}'".format(bestGenome.uid, bestGenome.fitness, bestGenome.geneCreationClass))
 			print("Genome: {}".format(bestGenome.genome))
 
-			if self.evolverConfig["debug"] == True:
-				bestInGenerationHistory.append(randint(maxRandom - partRandom, maxRandom))
-				maxRandom -= partRandom
-			else:
-				bestInGenerationHistory.append(bestGenome.result.testScore)
+			bestInGenerationHistory.append(bestGenome.result.testScore)
 
 			if i < generations - 1:
 				self.evovlePopulation.cloneAndMutate()
+
+		# Save best
+
+		if self.evolverConfig['save_filepath'] is not None:
+			print("Saving genome id {} - score {:.4} - to file {}".format(bestGenome.uid, bestGenome.fitness, self.evolverConfig['save_filepath']))
+			save_checkpoint = self.evolverConfig['save_checkpoint']
+			save_checkpoint(bestGenome.result.testCheckpoint, self.evolverConfig['save_filepath'])
+
+		# Stats
 
 		print("\n< ------- Statistics ------- >\n")
 
