@@ -20,13 +20,13 @@ config = AgentConfig(
     deepq_double_learning=True,
     deepq_dueling_networks=True,
     per_active=True)
-agent = DQNAgent(env, config)
+agent = DQNAgent(config)
 
 # Create a runner that runs the agent in the environment
-runner = Runner(agent, save_best_score='Checkpoints/cardpole_v1_dqn.ch')
+runner = Runner(agent, save_best_score='Checkpoints/cartpole_v1_dqn_train.ch')
 
 # Run the agent
-score = runner.run_agent()
+score, checkpoint = runner.run_agent()
 
 # Visualize the score
 score.visualize()

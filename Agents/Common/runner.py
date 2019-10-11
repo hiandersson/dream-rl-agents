@@ -17,6 +17,8 @@ class Runner():
 
         score = Score(target_average=self.agent.config.target_average, window_size=100, total_episodes=self.agent.config.n_episodes, verbose=self.verbose, pbar=self.pbar)
 
+        best_checkpoint = None
+
         for i_episode in range(1, self.agent.config.n_episodes+1):
 
             # reset envirnoment
@@ -47,10 +49,12 @@ class Runner():
             found_best_score = score.post_episode(i_episode)
 
             # save checkpoint
-            if found_best_score != None and self.save_best_score != None:
-                self.agent.save(self.save_best_score)
+            if found_best_score != None:
+                best_checkpoint = self.agent.get_checkpoint()
+                if self.save_best_score != None:
+                    self.agent.save(self.save_best_score)
 
-        return score
+        return score, best_checkpoint
 
     def enjoy_checkpoint(self, checkpoint):
 

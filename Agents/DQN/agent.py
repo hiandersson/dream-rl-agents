@@ -17,23 +17,24 @@ print("GPU/CPU device: {}".format(device))
 class DQNAgent():
     """Interacts with and learns from the environment."""
 
-    def __init__(self, env, config):
-        """Initialize an Agent object.
-        
-        Params
-        ======
-        """
+    def __init__(self, config):
+
+        # ------------------- store configs and variables  -------------- #
+
+        self.env = config.env
+        self.config = config
+        self.init()
+    
+    def init(self):
 
         # ------------------- store configs and variables  ------------ #
 
-        self.env = env
-        self.config = config
-        self.action_size = env.action_space.n
-        self.state_size = env.observation_space.shape[0]
+        self.action_size = self.env.action_space.n
+        self.state_size = self.env.observation_space.shape[0]
         self.qvalue_prev = 0
         self.last_td_error = torch.tensor([[0.0]])
         self.t_step = 0
-        self.epsilon = config.epsilon_start
+        self.epsilon = self.config.epsilon_start
         
         # ------------------- create networks  ------------------------ #
 
@@ -48,7 +49,7 @@ class DQNAgent():
 
         # ------------------- create replay memory  ------------------- #
 
-        self.memory = ReplayBuffer(self.action_size, config)
+        self.memory = ReplayBuffer(self.action_size, self.config)
 
     def post_episode(self):
 
@@ -58,17 +59,27 @@ class DQNAgent():
 
         pass
 
-    def save(self, filepath):
+    def get_checkpoint(self):
 
         checkpoint = {
             'local_state_dict': self.qnetwork_local.state_dict(),
-            'target_state_dict': self.qnetwork_target.state_dict()}
+            'target_state_dict': self.qnetwork_target.state_dict(),
+            'agent_config': self.config.get_dict(),
+        }
 
-        torch.save(checkpoint, filepath)
+        return checkpoint
+
+    def save(self, filepath):
+
+        torch.save(self.get_checkpoint(), filepath)
 
     def load(self, filepath):
 
         checkpoint = torch.load(filepath)
+
+        self.config = self.config.from_dict_to_config(checkpoint['agent_config'])
+
+        self.init()
 
         self.qnetwork_local.load_state_dict(checkpoint['local_state_dict'])
         self.qnetwork_target.load_state_dict(checkpoint['target_state_dict'])

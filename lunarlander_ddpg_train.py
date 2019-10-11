@@ -27,16 +27,15 @@ config = AgentConfig(
     fc2_units=300,
     per_active=False)
 
-agent = DDPGAgent(env, config)
+agent = DDPGAgent(config)
 
 # Create a runner that runs the agent in the environment
-runner = Runner(agent)
+runner = Runner(agent, save_best_score='Checkpoints/lunarlander_v2_ddpg_train.ch')
 
 # Run the agent
-score = runner.run_agent()
+score, checkpoint = runner.run_agent()
 
 # Visualize the score
 score.visualize()
 
-# Close
 env.close()

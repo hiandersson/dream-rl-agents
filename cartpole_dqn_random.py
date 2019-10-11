@@ -8,7 +8,7 @@ from Agents.Common import Runner
 env = gym.make("CartPole-v1")
 
 # Create the agent
-agent = DQNAgent(env, AgentConfig(env=env))
+agent = DQNAgent(AgentConfig(env=env))
 
 # Create a runner that runs the agent in the environment
 runner = Runner(agent)

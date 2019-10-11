@@ -58,10 +58,6 @@ evolverConfig = {
         'gamma':        [0.90, 0.92, 0.94, 0.96, 0.98, 0.9, 0.995, 1.0],
         'fc1_units':    [16,32,64,128,256,512],
     },
-    'allPossibleGenesSimpleShort': {
-        'learningRate': "Rate",
-        'batchSize': "Batch",
-    }
 }
 
 evolver_test = evolver(evolverConfig)

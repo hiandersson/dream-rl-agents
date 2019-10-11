@@ -20,34 +20,35 @@ from Agents.Common.noise import OUNoise
 from Agents.Common.nn_updates import soft_update
 from Agents.Common.nn_updates import copy_weights
 
-# map device
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-logger = logging.getLogger('ddpg')
-logger.debug('Device Info:{}'.format(device))
-
 class DDPGAgent():
     
-    def __init__(self, env, config):
+    def __init__(self, config):
 
         # ------------------- store configs and variables  ------------ #
 
-        action_size = env.action_space.shape[0]
-        state_size = env.observation_space.shape[0]
         self.config = config
-        self.env = env
+        self.env = config.env
+        self.init()
+
+    def init(self):
+
+        # ------------------- store configs and variables  ------------ #
+
+        action_size = self.env.action_space.shape[0]
+        state_size = self.env.observation_space.shape[0]
         self.learn_step = 0
         self.qvalue_prev = 0
         self.last_td_error = torch.tensor([[0.0]])
-        self.seed = random.seed(config.seed)      
+        self.seed = random.seed(self.config.seed)      
 
         # ------------------- create networks  ------------------------ #
 
-        self.actor_local = Actor(state_size, action_size, self.config.seed, self.config.fc1_units, self.config.fc2_units, self.config.batch_norm).to(device)
-        self.actor_target = Actor(state_size, action_size, self.config.seed, self.config.fc1_units, self.config.fc2_units, self.config.batch_norm).to(device)
+        self.actor_local = Actor(state_size, action_size, self.config.seed, self.config.fc1_units, self.config.fc2_units, self.config.batch_norm).to(self.config.device)
+        self.actor_target = Actor(state_size, action_size, self.config.seed, self.config.fc1_units, self.config.fc2_units, self.config.batch_norm).to(self.config.device)
         self.actor_optimizer = optim.Adam(self.actor_local.parameters(), self.config.actor_learning_rate)
 
-        self.critic_local = Critic(state_size, action_size, self.config.seed, self.config.fc1_units, self.config.fc2_units, self.config.batch_norm).to(device)
-        self.critic_target = Critic(state_size, action_size, self.config.seed, self.config.fc1_units, self.config.fc2_units, self.config.batch_norm).to(device)
+        self.critic_local = Critic(state_size, action_size, self.config.seed, self.config.fc1_units, self.config.fc2_units, self.config.batch_norm).to(self.config.device)
+        self.critic_target = Critic(state_size, action_size, self.config.seed, self.config.fc1_units, self.config.fc2_units, self.config.batch_norm).to(self.config.device)
         self.critic_optimizer = optim.Adam(self.critic_local.parameters(), self.config.critic_learning_rate, weight_decay=self.config.weight_decay)
 
         # ------------------- create action noise  -------------------- #
@@ -56,21 +57,31 @@ class DDPGAgent():
 
         # ------------------- create replay memory  ------------------- #
 
-        self.memory = ReplayBuffer(action_size, config)
-    
-    def save(self, filepath):
+        self.memory = ReplayBuffer(action_size, self.config)
+
+    def get_checkpoint(self):
 
         checkpoint = {
             'actor_local': self.actor_local.state_dict(),
             'actor_target': self.actor_target.state_dict(),
             'critic_local': self.critic_local.state_dict(),
-            'critic_target': self.critic_target.state_dict()}
+            'critic_target': self.critic_target.state_dict(),
+            'agent_config': self.config.get_dict(),
+        }
 
-        torch.save(checkpoint, filepath)
+        return checkpoint
+
+    def save(self, filepath):
+
+        torch.save(self.get_checkpoint(), filepath)
 
     def load(self, filepath):
 
         checkpoint = torch.load(filepath)
+
+        self.config = self.config.from_dict_to_config(checkpoint['agent_config'])
+
+        self.init()
 
         self.actor_local.load_state_dict(checkpoint['actor_local'])
         self.actor_target.load_state_dict(checkpoint['actor_target'])
@@ -106,7 +117,7 @@ class DDPGAgent():
         # ------------------- select action from local network  ------- #
 
         state_reshaped = state.reshape(1, state.shape[0])   
-        state_act = torch.from_numpy(state_reshaped).float().to(device)
+        state_act = torch.from_numpy(state_reshaped).float().to(self.config.device)
 
         self.actor_local.eval()
         with torch.no_grad():
@@ -127,7 +138,7 @@ class DDPGAgent():
         # ------------------- select action from local network  ------- #
 
         state_reshaped = state.reshape(1, state.shape[0])   
-        state_act = torch.from_numpy(state_reshaped).float().to(device)
+        state_act = torch.from_numpy(state_reshaped).float().to(self.config.device)
 
         self.actor_local.eval()
         with torch.no_grad():

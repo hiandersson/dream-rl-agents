@@ -135,12 +135,6 @@ class genomeInPopulation:
 	def printGenome(self):
 		print("Genome id={:04} score={} genome={}".format(self.uid, int(self.fitness), self.genome))
 
-	def getGenomShortDesc(self):
-		returnString = ""
-		for key,value in self.genome.items():
-			returnString += "{} {} ".format(self.evolverConfig['allPossibleGenesSimpleShort'][key], value)
-		return returnString
-
 	def getFitnessGenomeArgs(self, generation, tfDevice, pbar):
 
 		genomeArgs = {
