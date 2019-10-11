@@ -44,7 +44,7 @@ evolverConfig = {
     'save_filepath':'Checkpoints/acrobot_v1_reinforce_evo.ch',
     'GPUDevices': None,
     'episodes': 200,
-    'populationSize': 1,
+    'populationSize': 25,
     'retainSize': 5,
     'mutateOneGeneRandom': 5,
     'mutateTwoGenesRandom': 5,
