@@ -8,7 +8,7 @@ from Agents.Common import Runner
 env = gym.make("Acrobot-v1")
 
 # Create the agent
-agent = REINFORCEAgent(env, AgentConfig(env=env))
+agent = REINFORCEAgent(AgentConfig(env=env))
 
 # Create a runner that runs the agent in the environment
 runner = Runner(agent)

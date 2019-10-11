@@ -6,6 +6,7 @@ from dict2obj import Dict2Obj
 class AgentConfig():
     def __init__(self, 
                 env=None,
+                device=None,
                 parallelEnv=None,
                 seed=0,
                 target_average=10, 
@@ -46,7 +47,9 @@ class AgentConfig():
         self.parallelEnv = parallelEnv
 
         # device
-        self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+        self.device = device
+        if self.device is None:
+            self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
         # seed for reproducibility
         self.seed = seed

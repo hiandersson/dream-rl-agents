@@ -18,6 +18,7 @@ def score_genome(genome, episodes, pbar):
     # "Acrobot-v1 is an unsolved environment, which means it does not have a specified reward threshold at which it's considered solved.""
     config = AgentConfig(
         env=env,
+        device="cpu",
         n_episodes=episodes, 
         target_average=-10,
         max_t=200,
