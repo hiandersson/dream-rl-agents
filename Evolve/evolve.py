@@ -383,7 +383,7 @@ class evovlePopulation:
 			newGenome.mutateOneGeneClose()
 			self.addToPopulation(newGenome)
 
-class evolver:
+class Evolver:
 	def __init__(self, evolverConfig):
 
 		self.evovlePopulation = evovlePopulation(evolverConfig)

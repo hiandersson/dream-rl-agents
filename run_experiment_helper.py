@@ -1,11 +1,13 @@
 # External
 import gym
 import sys
+import torch
 
 # Internal
 from Agents.Common import Runner
 from Agents.Common import AgentConfig
 from Agents.Common import Runner
+from Evolve import Evolver
 
 class RunExperiment():
     """Interacts with and learns from the environment."""
@@ -68,7 +70,7 @@ class RunExperiment():
         evolverConfig['save_filepath'] = 'Checkpoints/{}_evo.ch'.format(self.gym_name.lower())
         evolverConfig['GPUDevices'] = None
 
-        evolver_test = evolver(evolverConfig)
+        evolver_test = Evolver(evolverConfig)
         evolver_test.start()
 
     def command(self, arg):

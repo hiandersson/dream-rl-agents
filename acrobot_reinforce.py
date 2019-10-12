@@ -31,7 +31,7 @@ class AcrobotREINFORCE(RunExperiment):
 
     def get_evolver_config(self):
         return {
-            'episodes': 20,
+            'episodes': 2,
             'populationSize': 25,
             'retainSize': 5,
             'mutateOneGeneRandom': 5,
