@@ -14,13 +14,13 @@ class AtariBreakoutDQN(RunExperiment):
             n_episodes=1000, 
             target_average=475,
             convolutional_input=True,
-            update_every=1,
-            batch_size=2,
-            gamma=0.95,
+            update_every=4,
+            batch_size=64,
+            gamma=0.99,
             learning_rate=1e-4,
-            deepq_double_learning=False,
-            deepq_dueling_networks=False,
-            per_active=False)
+            deepq_double_learning=True,
+            deepq_dueling_networks=True,
+            per_active=True)
 
     def get_agent_evolve_config(self, env, genome, episodes):
         return AgentConfig(
@@ -44,7 +44,7 @@ class AtariBreakoutDQN(RunExperiment):
     def get_evolver_config(self):
         return {
             'episodes': 500,
-            'populationSize': 25,
+            'populationSize': 2,
             'retainSize': 5,
             'mutateOneGeneRandom': 5,
             'mutateTwoGenesRandom': 5,

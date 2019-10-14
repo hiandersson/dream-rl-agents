@@ -18,9 +18,10 @@ class QNetwork(nn.Module):
 
 # Vanilla DQN network convolutional
 class QNetworkConvolutional(nn.Module):
-    def __init__(self, state_size, action_size, seed, fc_units):
+    def __init__(self, state_size, action_size, seed, fc_units, device):
         super(QNetworkConvolutional, self).__init__()
         self.seed = torch.manual_seed(seed)
+        self.device = device
 
         # 80x80x2 to 38x38x4
         # 2 channel from the stacked frame
@@ -41,7 +42,7 @@ class QNetworkConvolutional(nn.Module):
         self.fc2 = nn.Linear(fc_units, action_size)
 
     def forward(self, state):
-        #print("state = {}".format(state.shape))
+        state = state.to(self.device)
         x = F.relu(self.conv1(state))
         x = F.relu(self.conv2(x))
         x = x.view(-1,self.size)

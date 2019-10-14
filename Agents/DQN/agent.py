@@ -10,9 +10,6 @@ import torch
 import torch.nn.functional as F
 import torch.optim as optim
 
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-print("GPU/CPU device: {}".format(device))
-
 class DQNAgent():
     """Interacts with and learns from the environment."""
 
@@ -30,7 +27,7 @@ class DQNAgent():
 
         self.action_size = self.env.action_space.n
         self.state_size = self.env.observation_space.shape[0]
-        self.qvalue_prev = 0
+        self.qvalue_prev = torch.tensor([[0.0]])
         self.last_td_error = torch.tensor([[0.0]])
         self.t_step = 0
         self.epsilon = self.config.epsilon_start
@@ -38,15 +35,15 @@ class DQNAgent():
         # ------------------- create networks  ------------------------ #
 
         if self.config.convolutional_input == True:
-            self.qnetwork_local = QNetworkConvolutional(self.state_size , self.action_size, self.config.seed, self.config.fc1_units).to(device)
-            self.qnetwork_target = QNetworkConvolutional(self.state_size , self.action_size, self.config.seed, self.config.fc1_units).to(device)
+            self.qnetwork_local = QNetworkConvolutional(self.state_size , self.action_size, self.config.seed, self.config.fc1_units, self.config.device).to(self.config.device)
+            self.qnetwork_target = QNetworkConvolutional(self.state_size , self.action_size, self.config.seed, self.config.fc1_units, self.config.device).to(self.config.device)
         else:
             if self.config.deepq_dueling_networks == True:
-                self.qnetwork_local = QDuelingNetwork(self.state_size , self.action_size, self.config.seed, self.config.fc1_units).to(device)
-                self.qnetwork_target = QDuelingNetwork(self.state_size , self.action_size, self.config.seed, self.config.fc1_units).to(device)
+                self.qnetwork_local = QDuelingNetwork(self.state_size , self.action_size, self.config.seed, self.config.fc1_units).to(self.config.device)
+                self.qnetwork_target = QDuelingNetwork(self.state_size , self.action_size, self.config.seed, self.config.fc1_units).to(self.config.device)
             else:
-                self.qnetwork_local = QNetwork(self.state_size , self.action_size, self.config.seed, self.config.fc1_units).to(device)
-                self.qnetwork_target = QNetwork(self.state_size , self.action_size, self.config.seed, self.config.fc1_units).to(device)
+                self.qnetwork_local = QNetwork(self.state_size , self.action_size, self.config.seed, self.config.fc1_units).to(self.config.device)
+                self.qnetwork_target = QNetwork(self.state_size , self.action_size, self.config.seed, self.config.fc1_units).to(self.config.device)
 
         self.optimizer = optim.Adam(self.qnetwork_local.parameters(), lr=self.config.learning_rate)
 
@@ -111,7 +108,7 @@ class DQNAgent():
 
         # ------------------- select action from local network  ------- #
 
-        state = torch.from_numpy(state).float().unsqueeze(0).to(device)
+        state = torch.from_numpy(state).float().unsqueeze(0).to(self.config.device)
 
         self.qnetwork_local.eval()
         with torch.no_grad():
@@ -129,7 +126,7 @@ class DQNAgent():
 
         # ------------------- select action from local network  ------- #
 
-        state = torch.from_numpy(state).float().unsqueeze(0).to(device)
+        state = torch.from_numpy(state).float().unsqueeze(0).to(self.config.device)
 
         self.qnetwork_local.eval()
         with torch.no_grad():
@@ -165,21 +162,21 @@ class DQNAgent():
             Q_targets_next = self.qnetwork_target(next_states).detach().max(1)[0].unsqueeze(1)
 
         # Store last TD error for prioritized experience replay
-        self.last_td_error = (Q_targets_next - self.qvalue_prev).detach().numpy()
+        self.last_td_error = (Q_targets_next.cpu() - self.qvalue_prev.cpu()).detach().numpy()
         self.qvalue_prev = Q_targets_next
 
         # Update target
-        Q_targets = rewards + (self.config.gamma * Q_targets_next * (1 - dones))
+        Q_targets = rewards.to(self.config.device) + (self.config.gamma * Q_targets_next * (1 - dones.to(self.config.device)))
 
         # Get expected Q values from local model
-        Q_expected = self.qnetwork_local(states).gather(1, actions.long())
+        Q_expected = self.qnetwork_local(states).gather(1, actions.to(self.config.device).long())
 
         # ------------------- calculate and minimize the loss --------- #
 
         if self.config.per_active == True:
 
             # Prioritized experience replay loss - multiple gradient with weights 
-            loss = (per_weights * ((Q_expected - Q_targets) ** 2)).sum() / Q_expected.data.nelement()
+            loss = (per_weights.to(self.config.device) * ((Q_expected - Q_targets) ** 2)).sum() / Q_expected.data.nelement()
         else:
 
             # Compute straight mse loss
