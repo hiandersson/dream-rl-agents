@@ -47,17 +47,16 @@ class RunExperiment():
 
         env.close()
 
-    def score_genome(self, genome, episodes, pbar):
+    def score_genome(self, genome, episodes, device, pbar):
 
         with main_lock:
             env = gym.make(self.gym_name) # make gym
 
-        agent = self.get_agent(self.get_agent_evolve_config(env, genome, episodes)) 
-        runner = Runner(agent, verbose=1, pbar=pbar) # Create a runner that runs the agent in the environment
-        
-        score, checkpoint = self.run(runner)  # Run the agent
-
-        env.close() # Close
+        with torch.cuda.device(1):
+            agent = self.get_agent(self.get_agent_evolve_config(env, genome, device, episodes)) 
+            runner = Runner(agent, verbose=1, pbar=pbar) # Create a runner that runs the agent in the environment
+            score, checkpoint = self.run(runner)  # Run the agent
+            env.close() # Close
 
         return score.best_score, checkpoint
 
@@ -72,7 +71,6 @@ class RunExperiment():
         evolverConfig['score_genome'] = self.score_genome
         evolverConfig['save_checkpoint'] = self.save_checkpoint
         evolverConfig['save_filepath'] = 'Checkpoints/{}_evo.ch'.format(self.gym_name.lower())
-        evolverConfig['GPUDevices'] = None
 
         evolver_test = Evolver(evolverConfig)
         evolver_test.start()

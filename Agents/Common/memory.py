@@ -5,8 +5,6 @@ import torch
 import torch.nn.functional as F
 import torch.optim as optim
 
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-
 class ReplayBuffer:
     """Fixed-size buffer to store experience tuples."""
 
@@ -54,18 +52,18 @@ class ReplayBuffer:
             # weights ( 1 / N * 1 / P(i)) ^ beta
             one_over_memory_length = 1 / len(self.memory)
             weights = [np.power(one_over_memory_length * ( 1 / sampling_probabilities[ii]), self.agent_config.per_beta) for ii in sampled_indexes]
-            replay_weights = torch.from_numpy(np.vstack([w for w in weights])).float().to(device)
+            replay_weights = torch.from_numpy(np.vstack([w for w in weights])).float().to(self.agent_config.device)
         
         # No replay
         else:
             experiences = random.sample(self.memory, k=self.batch_size)
             replay_weights = None
 
-        states = torch.from_numpy(np.vstack([e.state for e in experiences if e is not None])).float().to(device)
-        actions = torch.from_numpy(np.vstack([e.action for e in experiences if e is not None])).float().to(device)
-        rewards = torch.from_numpy(np.vstack([e.reward for e in experiences if e is not None])).float().to(device)
-        next_states = torch.from_numpy(np.vstack([e.next_state for e in experiences if e is not None])).float().to(device)
-        dones = torch.from_numpy(np.vstack([e.done for e in experiences if e is not None]).astype(np.uint8)).float().to(device)
+        states = torch.from_numpy(np.vstack([e.state for e in experiences if e is not None])).float().to(self.agent_config.device)
+        actions = torch.from_numpy(np.vstack([e.action for e in experiences if e is not None])).float().to(self.agent_config.device)
+        rewards = torch.from_numpy(np.vstack([e.reward for e in experiences if e is not None])).float().to(self.agent_config.device)
+        next_states = torch.from_numpy(np.vstack([e.next_state for e in experiences if e is not None])).float().to(self.agent_config.device)
+        dones = torch.from_numpy(np.vstack([e.done for e in experiences if e is not None]).astype(np.uint8)).float().to(self.agent_config.device)
 
         return (states, actions, rewards, next_states, dones), replay_weights
 

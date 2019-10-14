@@ -27,8 +27,8 @@ class DQNAgent():
 
         self.action_size = self.env.action_space.n
         self.state_size = self.env.observation_space.shape[0]
-        self.qvalue_prev = torch.tensor([[0.0]])
-        self.last_td_error = torch.tensor([[0.0]])
+        self.qvalue_prev = torch.tensor([[0.0]]).to(self.config.device)
+        self.last_td_error = torch.tensor([[0.0]]).to(self.config.device)
         self.t_step = 0
         self.epsilon = self.config.epsilon_start
         
@@ -166,10 +166,10 @@ class DQNAgent():
         self.qvalue_prev = Q_targets_next
 
         # Update target
-        Q_targets = rewards.to(self.config.device) + (self.config.gamma * Q_targets_next * (1 - dones.to(self.config.device)))
+        Q_targets = rewards.to(self.config.device) + (self.config.gamma * Q_targets_next.to(self.config.device) * (1 - dones.to(self.config.device)))
 
         # Get expected Q values from local model
-        Q_expected = self.qnetwork_local(states).gather(1, actions.to(self.config.device).long())
+        Q_expected = self.qnetwork_local(states).gather(1, actions.long())
 
         # ------------------- calculate and minimize the loss --------- #
 

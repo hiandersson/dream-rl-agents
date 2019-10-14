@@ -24,10 +24,10 @@ class AtariBreakoutDQN(RunExperiment):
             deepq_dueling_networks=True,
             per_active=True)
 
-    def get_agent_evolve_config(self, env, genome, episodes):
+    def get_agent_evolve_config(self, env, genome, device, episodes):
         return AgentConfig(
             env=env,
-            device="cpu",
+            device=device,
             n_episodes=episodes, 
             target_average=500,
             convolutional_input=True,
@@ -46,7 +46,8 @@ class AtariBreakoutDQN(RunExperiment):
     def get_evolver_config(self):
         return {
             'episodes': 500,
-            'populationSize': 10,
+            'GPUDevices': ['cuda:1'],
+            'populationSize': 25,
             'retainSize': 5,
             'mutateOneGeneRandom': 5,
             'mutateTwoGenesRandom': 5,
@@ -56,14 +57,14 @@ class AtariBreakoutDQN(RunExperiment):
             'generations': 2,
             'randomSeed': 1,
             'allPossibleGenesSimple': {
-                'learningRate': [0.001, 0.002, 0.003, 0.004, 0.0001, 0.0005],
-                'batchSize':    [32,64,128,256,512],
-                'gamma':        [0.90, 0.92, 0.94, 0.96, 0.98, 0.9, 0.995, 0.999],
-                'updateEvery':  [1,2,3,4,5,6],
-                'fc1_units':    [64,128,256,512],
-                'fc2_units':    [64,128,256,512],
+                'learningRate': [0.001, 0.0001, 0.0005, 0.00001, 0.00005],
+                'batchSize':    [16,32,64,128],
+                'gamma':        [0.97, 0.98, 0.9, 0.995, 0.999],
+                'updateEvery':  [2,3,4,5,6],
+                'fc1_units':    [64,128,256,512,1024],
+                'fc2_units':    [64,128,256,512,1024],
                 'memory_size':  [int(1e5), int(1e6)],
-                'tau':          [1e-2, 1e-3, 1e-4],
+                'tau':          [1e-2, 1e-3, 1e-4, 1e-5, 1e-6],
             },
         }
 

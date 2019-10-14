@@ -155,7 +155,7 @@ def genomeThreadedSubmit(genomeArgs):
 	testResult = genomeResult()
 	testResult.genome = genomeArgs['genome']
 	testResult.genomeUID = genomeArgs['genomeUID']
-	testResult.testScore, testResult.testCheckpoint = score_genome(genomeArgs['genome'], genomeArgs['episodes'], genomeArgs['pbar'])
+	testResult.testScore, testResult.testCheckpoint = score_genome(genomeArgs['genome'], genomeArgs['episodes'], genomeArgs['device'], genomeArgs['pbar'])
 
 	return testResult
 
@@ -262,7 +262,7 @@ class evovlePopulation:
 					if rollingGPUDevices == None:
 						device = "cpu"
 					else:
-						device = "cuda:"+rollingGPUDevices[rollingGPUDevicesIndex % len(rollingGPUDevices)]
+						device = rollingGPUDevices[rollingGPUDevicesIndex % len(rollingGPUDevices)]
 						rollingGPUDevicesIndex += 1
 
 					genomeExecList.append(instance.genomesList[i].getFitnessGenomeArgs(generation, device, pbar=self.genomesList[i].pbar))
@@ -271,7 +271,7 @@ class evovlePopulation:
 					if maxWorkers != None:
 						count = count + 1
 						if count > maxWorkers - 1:
-							print("Wont submit more workers {} then max {}".format(count - 1, maxWorkers))
+							# print("Wont submit more workers {} then max {}".format(count - 1, maxWorkers))
 							break
 
 			if maxWorkers != None and len(genomeExecList) == 0:
