@@ -46,7 +46,7 @@ class AtariBreakoutDQN(RunExperiment):
     def get_evolver_config(self):
         return {
             'episodes': 500,
-            'populationSize': 2,
+            'populationSize': 10,
             'retainSize': 5,
             'mutateOneGeneRandom': 5,
             'mutateTwoGenesRandom': 5,

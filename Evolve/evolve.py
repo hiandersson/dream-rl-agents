@@ -135,13 +135,13 @@ class genomeInPopulation:
 	def printGenome(self):
 		print("Genome id={:04} score={} genome={}".format(self.uid, int(self.fitness), self.genome))
 
-	def getFitnessGenomeArgs(self, generation, tfDevice, pbar):
+	def getFitnessGenomeArgs(self, generation, device, pbar):
 
 		genomeArgs = {
 			'genome': self.genome,
 			'pbar': pbar,
 			'genomeUID': self.uid,
-			'tfDevice': tfDevice,
+			'device': device,
 			'episodes': self.evolverConfig['episodes'],
 			'score_genome': self.evolverConfig['score_genome'],
 		}
@@ -260,12 +260,12 @@ class evovlePopulation:
 					self.genomesList[i].pbar = tqdm(file=sys.stdout,total=self.evolverConfig['episodes'], desc = "Agent:{:03}".format(self.genomesList[i].uid), ncols = 128, position=position)
 
 					if rollingGPUDevices == None:
-						tfDevice = "/cpu:0"
+						device = "cpu"
 					else:
-						tfDevice = rollingGPUDevices[rollingGPUDevicesIndex % len(rollingGPUDevices)]
+						device = "cuda:"+rollingGPUDevices[rollingGPUDevicesIndex % len(rollingGPUDevices)]
 						rollingGPUDevicesIndex += 1
 
-					genomeExecList.append(instance.genomesList[i].getFitnessGenomeArgs(generation, tfDevice, pbar=self.genomesList[i].pbar))
+					genomeExecList.append(instance.genomesList[i].getFitnessGenomeArgs(generation, device, pbar=self.genomesList[i].pbar))
 					position += 1
 
 					if maxWorkers != None:

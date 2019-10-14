@@ -51,13 +51,13 @@ class RunExperiment():
 
         with main_lock:
             env = gym.make(self.gym_name) # make gym
-            agent = self.get_agent(self.get_agent_evolve_config(env, genome, episodes)) 
-            runner = Runner(agent, verbose=1, pbar=pbar) # Create a runner that runs the agent in the environment
+
+        agent = self.get_agent(self.get_agent_evolve_config(env, genome, episodes)) 
+        runner = Runner(agent, verbose=1, pbar=pbar) # Create a runner that runs the agent in the environment
         
         score, checkpoint = self.run(runner)  # Run the agent
 
-        with main_lock:
-            env.close() # Close
+        env.close() # Close
 
         return score.best_score, checkpoint
 
