@@ -3,7 +3,7 @@ from Agents.DQN import DQNAgent
 
 class AtariBreakoutDQN(RunExperiment):
     def __init__(self):
-        RunExperiment.__init__(self, "Breakout-v0")
+        RunExperiment.__init__(self, "BreakoutDeterministic-v4")
 
     def get_agent(self, config):
         return DQNAgent(config)
@@ -14,10 +14,12 @@ class AtariBreakoutDQN(RunExperiment):
             n_episodes=1000, 
             target_average=500,
             convolutional_input=True,
+            memory_size=1000000,
             update_every=4,
-            batch_size=64,
+            batch_size=32,
             gamma=0.99,
-            learning_rate=1e-4,
+            learning_rate=0.00001,
+            fc1_units=1024,
             deepq_double_learning=True,
             deepq_dueling_networks=True,
             per_active=True)
