@@ -12,7 +12,7 @@ class AtariBreakoutDQN(RunExperiment):
         return AgentConfig(
             env=env,
             n_episodes=1000, 
-            target_average=475,
+            target_average=500,
             convolutional_input=True,
             update_every=4,
             batch_size=64,
