@@ -29,6 +29,7 @@ class CardpoleDQN(RunExperiment):
     def get_agent_evolve_config(self, env, genome, episodes):
         return AgentConfig(
             env=env,
+            device="cpu",
             seed=42,
             target_average=200, 
             n_episodes=episodes, 
