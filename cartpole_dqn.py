@@ -11,7 +11,7 @@ class CardpoleDQN(RunExperiment):
     def get_agent_train_config(self, env):
         return AgentConfig(
             env=env,
-            n_episodes=5, 
+            n_episodes=100, 
             target_average=475,
             update_every=1,
             batch_size=64,

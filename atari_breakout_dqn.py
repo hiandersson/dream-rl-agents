@@ -13,13 +13,17 @@ class AtariBreakoutDQN(RunExperiment):
             env=env,
             n_episodes=1000, 
             target_average=475,
+            convolutional_input=True,
             update_every=1,
-            batch_size=64,
+            batch_size=2,
             gamma=0.95,
             learning_rate=1e-4,
-            deepq_double_learning=True,
-            deepq_dueling_networks=True,
-            per_active=True)
+            deepq_double_learning=False,
+            deepq_dueling_networks=False,
+            per_active=False)
+
+    def run(self, runner):
+        return runner.run_agent()
 
 if __name__ == "__main__":
     run = AtariBreakoutDQN()

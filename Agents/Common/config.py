@@ -39,7 +39,8 @@ class AgentConfig():
                 ppo_epsilon = 0.1,
                 ppo_beta = .01,
                 ppo_tmax = 320,
-                ppo_gradientdescent_steps_per_epoch = 4
+                ppo_gradientdescent_steps_per_epoch = 4,
+                convolutional_input=False
                 ):
 
         # environments
@@ -63,6 +64,9 @@ class AgentConfig():
         self.target_average=target_average
         self.n_episodes=n_episodes
         self.max_t=max_t
+
+        # input
+        self.convolutional_input = convolutional_input
 
         # epislon
         self.epsilon_start = epsilon_start

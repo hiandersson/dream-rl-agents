@@ -2,8 +2,7 @@ import numpy as np
 import random
 from collections import namedtuple, deque
 
-from Agents.DQN.model import QNetwork
-from Agents.DQN.model import QDuelingNetwork
+from Agents.DQN.model import QNetwork, QNetworkConvolutional, QDuelingNetwork
 from Agents.Common.memory import ReplayBuffer
 from Agents.Common.nn_updates import soft_update
 
@@ -38,12 +37,16 @@ class DQNAgent():
         
         # ------------------- create networks  ------------------------ #
 
-        if self.config.deepq_dueling_networks == True:
-            self.qnetwork_local = QDuelingNetwork(self.state_size , self.action_size, self.config.seed, self.config.fc1_units).to(device)
-            self.qnetwork_target = QDuelingNetwork(self.state_size , self.action_size, self.config.seed, self.config.fc1_units).to(device)
+        if self.config.convolutional_input == True:
+            self.qnetwork_local = QNetworkConvolutional(self.state_size , self.action_size, self.config.seed, self.config.fc1_units).to(device)
+            self.qnetwork_target = QNetworkConvolutional(self.state_size , self.action_size, self.config.seed, self.config.fc1_units).to(device)
         else:
-            self.qnetwork_local = QNetwork(self.state_size , self.action_size, self.config.seed, self.config.fc1_units).to(device)
-            self.qnetwork_target = QNetwork(self.state_size , self.action_size, self.config.seed, self.config.fc1_units).to(device)
+            if self.config.deepq_dueling_networks == True:
+                self.qnetwork_local = QDuelingNetwork(self.state_size , self.action_size, self.config.seed, self.config.fc1_units).to(device)
+                self.qnetwork_target = QDuelingNetwork(self.state_size , self.action_size, self.config.seed, self.config.fc1_units).to(device)
+            else:
+                self.qnetwork_local = QNetwork(self.state_size , self.action_size, self.config.seed, self.config.fc1_units).to(device)
+                self.qnetwork_target = QNetwork(self.state_size , self.action_size, self.config.seed, self.config.fc1_units).to(device)
 
         self.optimizer = optim.Adam(self.qnetwork_local.parameters(), lr=self.config.learning_rate)
 
@@ -146,6 +149,11 @@ class DQNAgent():
         # ------------------- unpack experiences  --------------------- #
 
         states, actions, rewards, next_states, dones = experiences
+
+        # Prepare for batches of images to convolutional input
+        if self.config.convolutional_input == True:
+            states = states.unsqueeze(0).permute(1,0,2,3)
+            next_states = next_states.unsqueeze(0).permute(1,0,2,3)
 
         # ------------------- calculate q expected and target  -------- #
 

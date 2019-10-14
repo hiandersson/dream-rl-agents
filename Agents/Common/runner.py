@@ -1,9 +1,33 @@
 # External
 import numpy as np
+from PIL import Image
+import torch
+from torchvision import transforms
 
 # Internal
 from Agents.Utils import Score
 from Agents.Utils import preprocess_batch
+
+def preprocess_state(state, config):
+    if config.convolutional_input == False:
+        return state
+    """
+    Takes in raw Atari image, returns 84x84 resized/scaled grayscale image
+    state: should be 210 x 160 x 3 shaped np.array
+    output: 1x84x84 image
+    """
+    cropped = Image.fromarray(state)\
+        .crop((0, 34, 160, 160 + 34))
+    composite = transforms.Compose([
+        transforms.Grayscale(),
+        transforms.Resize((96, 96))
+    ])
+    image = composite(cropped)
+    small_img = np.uint8(image)
+    return np.expand_dims(small_img, 0)
+
+
+#prepro = lambda img: imresize(img[35:195].mean(2), (80,80)).astype(np.float32).reshape(1,80,80)/255.
 
 class Runner():
 
@@ -22,7 +46,7 @@ class Runner():
         for i_episode in range(1, self.agent.config.n_episodes+1):
 
             # reset envirnoment
-            state = self.agent.env.reset()
+            state = preprocess_state(self.agent.env.reset(), self.agent.config)
             score.reset_episode()
 
             # run the episode
@@ -34,6 +58,7 @@ class Runner():
 
                 # step
                 next_state, reward, done, _ = self.agent.env.step(action)
+                next_state = preprocess_state(next_state, self.agent.config)
                 self.agent.step(state, action, reward, next_state, done)
                 state = next_state
 
