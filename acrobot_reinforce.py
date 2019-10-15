@@ -18,10 +18,10 @@ class AcrobotREINFORCE(RunExperiment):
             fc1_units=512,
             learning_rate=0.002)
 
-    def get_agent_evolve_config(self, env, genome, episodes):
+    def get_agent_evolve_config(self, env, genome, device, episodes):
         return AgentConfig(
             env=env,
-            device="cpu",
+            device=device,
             n_episodes=episodes, 
             target_average=-10,
             max_t=200,
@@ -31,7 +31,8 @@ class AcrobotREINFORCE(RunExperiment):
 
     def get_evolver_config(self):
         return {
-            'episodes': 2,
+            'episodes': 200,
+            'GPUDevices': None,
             'populationSize': 25,
             'retainSize': 5,
             'mutateOneGeneRandom': 5,

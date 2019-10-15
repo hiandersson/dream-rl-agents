@@ -52,11 +52,10 @@ class RunExperiment():
         with main_lock:
             env = gym.make(self.gym_name) # make gym
 
-        with torch.cuda.device(1):
-            agent = self.get_agent(self.get_agent_evolve_config(env, genome, device, episodes)) 
-            runner = Runner(agent, verbose=1, pbar=pbar) # Create a runner that runs the agent in the environment
-            score, checkpoint = self.run(runner)  # Run the agent
-            env.close() # Close
+        agent = self.get_agent(self.get_agent_evolve_config(env, genome, device, episodes)) 
+        runner = Runner(agent, verbose=1, pbar=pbar) # Create a runner that runs the agent in the environment
+        score, checkpoint = self.run(runner)  # Run the agent
+        env.close() # Close
 
         return score.best_score, checkpoint
 

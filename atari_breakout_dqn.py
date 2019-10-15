@@ -18,8 +18,8 @@ class AtariBreakoutDQN(RunExperiment):
             update_every=4,
             batch_size=32,
             gamma=0.99,
-            learning_rate=0.00001,
-            fc1_units=1024,
+            learning_rate=0.0000625,
+            fc1_units=256,
             deepq_double_learning=True,
             deepq_dueling_networks=True,
             per_active=True)
@@ -46,8 +46,8 @@ class AtariBreakoutDQN(RunExperiment):
     def get_evolver_config(self):
         return {
             'episodes': 500,
-            'GPUDevices': ['cuda:1'],
-            'populationSize': 25,
+            'GPUDevices': None,
+            'populationSize': 10,
             'retainSize': 5,
             'mutateOneGeneRandom': 5,
             'mutateTwoGenesRandom': 5,
