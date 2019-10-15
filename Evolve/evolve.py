@@ -294,10 +294,10 @@ class evovlePopulation:
 
 							instance.genomesList[i].result = result
 
-							if instance.genomesList[i].result.testScore == -1:
+							if instance.genomesList[i].result.testScore.best_score == -1:
 								instance.genomesList[i].fitness = noFitness
 							else:
-								instance.genomesList[i].fitness = instance.genomesList[i].result.testScore
+								instance.genomesList[i].fitness = instance.genomesList[i].result.testScore.best_score
 
 			if maxWorkers == None:
 				break
@@ -427,7 +427,12 @@ class Evolver:
 			print("Saving genome id {} - score {:.4} - to file {}".format(bestGenome.uid, bestGenome.fitness, self.evolverConfig['save_filepath']))
 			save_checkpoint = self.evolverConfig['save_checkpoint']
 			save_checkpoint(bestGenome.result.testCheckpoint, self.evolverConfig['save_filepath'])
-
+			
+		if self.evolverConfig['save_plot'] is not None:
+			print(bestGenome.result.testScore)
+			print("Saving plot to file {}".format(self.evolverConfig['save_plot']))
+			bestGenome.result.testScore.visualize(save_to=self.evolverConfig['save_plot'] )
+	
 		# Stats
 
 		print("\n< ------- Statistics ------- >\n")

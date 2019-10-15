@@ -43,7 +43,7 @@ class RunExperiment():
 
         runner = Runner(agent, save_best_score='Checkpoints/{}_train.ch'.format(self.gym_name.lower())) # Create a runner that runs the agent in the environment
         score, checkpoint = self.run(runner) # Run the agent
-        score.visualize() # Visualize the score
+        score.visualize(save_to='Checkpoints/{}_train_plot.png'.format(self.gym_name.lower())) # Visualize the score
 
         env.close()
 
@@ -57,7 +57,7 @@ class RunExperiment():
         score, checkpoint = self.run(runner)  # Run the agent
         env.close() # Close
 
-        return score.best_score, checkpoint
+        return score, checkpoint
 
     def save_checkpoint(self, checkpoint, filepath):
 
@@ -70,6 +70,7 @@ class RunExperiment():
         evolverConfig['score_genome'] = self.score_genome
         evolverConfig['save_checkpoint'] = self.save_checkpoint
         evolverConfig['save_filepath'] = 'Checkpoints/{}_evo.ch'.format(self.gym_name.lower())
+        evolverConfig['save_plot'] = 'Checkpoints/{}_evo_plot.png'.format(self.gym_name.lower())
 
         evolver_test = Evolver(evolverConfig)
         evolver_test.start()

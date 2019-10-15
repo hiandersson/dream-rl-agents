@@ -57,7 +57,7 @@ class Score():
 
         return found_best_score
 
-    def visualize(self):
+    def visualize(self, save_to=None):
 
         def moving_average(a, n) :
             ret = np.cumsum(a, dtype=float)
@@ -75,4 +75,8 @@ class Score():
 
         plt.ylabel('Score')
         plt.xlabel('Episode #')
-        plt.show()
+
+        if save_to is None:
+            plt.show()
+        else:
+            plt.savefig(save_to)
