@@ -3,6 +3,7 @@ import numpy as np
 from PIL import Image
 import torch
 from torchvision import transforms
+import time
 
 # Internal
 from Agents.Utils import Score
@@ -88,19 +89,19 @@ class Runner():
         while True:
 
             # reset envirnoment
-            state = self.agent.env.reset()
+            state = self.agent.config.env.reset()
 
             # run the episode
             for t in range(self.agent.config.max_t):
 
                 # render
-                self.agent.env.render()
+                self.agent.config.env.render()
 
                 # act
                 action = self.agent.act_no_training(state)
 
                 # step
-                next_state, _, done, _ = self.agent.env.step(action)
+                next_state, _, done, _ = self.agent.config.env.step(action)
                 state = next_state
 
                 # break if done
@@ -109,27 +110,77 @@ class Runner():
 
     def random(self):
 
+        env = self.agent.config.env
+
         while True:
 
             # reset envirnoment
-            state = self.agent.env.reset()
+            state = env.reset()
 
             # run the episode
             for t in range(self.agent.config.max_t):
 
                 # render
-                self.agent.env.render()
+                env.render()
 
                 # act
-                action = self.agent.env.action_space.sample()
+                action = env.action_space.sample()
 
                 # step
-                next_state, _, done, _ = self.agent.env.step(action)
+                next_state, _, done, _ = env.step(action)
                 state = next_state
 
                 # break if done
                 if done:
                     break 
+
+    def enjoy_checkpoint_frame_batches_probabilities(self, checkpoint):
+
+        self.agent.load(checkpoint)
+
+        env = self.agent.config.env
+        policy = self.agent.policy
+
+        self.agent.config.RIGHT = 4
+        self.agent.config.LEFT = 5
+
+        while True:
+        
+            env.reset()
+
+            fr1, re1, is_done, _ = env.step(0)
+            fr2, re2, is_done, _ = env.step(0)
+
+            for t in range(self.agent.config.max_t):
+
+                # render
+                env.render()
+                
+                # prepare the input
+                # preprocess_batch properly converts two frames into 
+                # shape (n, 2, 80, 80), the proper input for the policy
+                # this is required when building CNN with pytorch
+                batch_input = preprocess_batch(self.agent.config.device, [fr1,fr2])
+                
+                # probs will only be used as the pi_old
+                # no gradient propagation is needed
+                # so we move it to the cpu
+                probs = policy(batch_input).squeeze().cpu().detach().numpy()
+                
+                action = np.where(np.random.rand(1) < probs, self.agent.config.RIGHT, self.agent.config.LEFT)
+                probs = np.where(action==self.agent.config.RIGHT, probs, 1.0-probs)
+                
+                # advance the game (0=no action)
+                # we take one action and skip game forward
+                fr1, re1, is_done, _ = env.step(action)
+                fr2, re2, is_done, _ = env.step(0)
+
+                time.sleep(0.04)
+
+                # stop if any of the trajectories is done
+                # we want all the lists to be retangular
+                if is_done:
+                    break
 
     # collect trajectories for a parallelized parallelEnv object
     def collect_trajectories(self):
@@ -196,7 +247,9 @@ class Runner():
 
     def run_parallel_trajectories(self):
 
-        score = Score(target_average=self.agent.config.target_average, window_size=100, total_episodes=self.agent.config.n_episodes)
+        score = Score(target_average=self.agent.config.target_average, window_size=100, total_episodes=self.agent.config.n_episodes, verbose=self.verbose, pbar=self.pbar)
+
+        best_checkpoint = None
 
         for i_episode in range(1, self.agent.config.n_episodes+1):
 
@@ -214,10 +267,12 @@ class Runner():
             found_best_score = score.post_episode(i_episode)
 
             # save checkpoint
-            if found_best_score != None and self.save_best_score != None:
-                self.agent.save(self.save_best_score)
+            if found_best_score != None:
+                best_checkpoint = self.agent.get_checkpoint()
+                if self.save_best_score != None:
+                    self.agent.save(self.save_best_score)
 
-        return score
+        return score, best_checkpoint
 
     def run_single_probability_trajectory(self):
 

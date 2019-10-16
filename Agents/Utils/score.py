@@ -42,18 +42,29 @@ class Score():
         best_score_str = "{:.4}".format(self.best_score).ljust(5,"0")
         
         if self.verbose == 1:
-            self.pbar.set_postfix(best=best_score_str,average=average_score_str,latest=latest_str, solved_episode=self.target_reached_in)
+            if self.target_average is not None:
+                self.pbar.set_postfix(best=best_score_str,average=average_score_str,latest=latest_str, solved_episode=self.target_reached_in)
+            else:
+                self.pbar.set_postfix(best=best_score_str,best_episode=self.target_reached_in,latest=latest_str)
             self.pbar.update(1)
-
-        if average_score > self.target_average and self.target_average_reached == False:
-            self.target_average_reached = True
-            self.target_reached_in = i_episode
 
         found_best_score = None
 
-        if average_score > self.best_score:
-            self.best_score = average_score
-            found_best_score = average_score
+        if self.target_average is not None:
+
+            if average_score > self.target_average and self.target_average_reached == False:
+                self.target_average_reached = True
+                self.target_reached_in = i_episode
+
+            if average_score > self.best_score:
+                self.best_score = average_score
+                found_best_score = average_score
+        else:
+
+            if self.score > self.best_score:
+                self.best_score = self.score
+                self.target_reached_in = i_episode
+                found_best_score = self.score
 
         return found_best_score
 

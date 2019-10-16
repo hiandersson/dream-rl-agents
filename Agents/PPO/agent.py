@@ -9,34 +9,56 @@ import logging
 # Internal
 from Agents.PPO.models import *
 
-# map device
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-
 class PPOAgent():
     
-    def __init__(self, envs, config):
+    def __init__(self, config):
 
         # ------------------- store configs and variables  -------------- #
 
-        self.envs = envs
+        self.envs = config.parallelEnv
         self.config = config
-        self.epsilon = config.ppo_epsilon
+        self.init()
+
+    def init(self):
+    
+        self.epsilon = self.config.ppo_epsilon
         self.beta = self.config.ppo_beta
 
         # ------------------- create networks  -------------------------- #
 
-        self.policy = Policy().to(device) 
+        self.policy = Policy().to(self.config.device) 
         self.optimizer = optim.Adam(self.policy.parameters(), lr=1e-4)
 
-        pass
-    
+    def get_checkpoint(self):
+
+        checkpoint = {
+            'policy': self.policy.state_dict(),
+            'agent_config': self.config.get_dict(),
+        }
+
+        return checkpoint
+
     def save(self, filepath):
 
-        pass
+        torch.save(self.get_checkpoint(), filepath)
 
     def load(self, filepath):
 
-        pass
+        checkpoint = torch.load(filepath)
+
+        self.config = self.config.from_dict_to_config(checkpoint['agent_config'])
+
+        self.init()
+
+        self.policy.load_state_dict(checkpoint['policy'])
+
+    def act_no_training(self, state):
+
+        # ------------------- select action from local network  ------- #
+
+        new_probabilities = self.states_to_probabilities(policy, state)
+
+        return action
 
     def states_to_probabilities(self, policy, states):
 
@@ -64,9 +86,9 @@ class PPOAgent():
         
         # ------------------- convert to pytorch tensors  --------------- #
 
-        actions = torch.tensor(actions, dtype=torch.int8, device=device)
-        old_probabilities = torch.tensor(old_probabilities, dtype=torch.float, device=device)
-        rewards = torch.tensor(rewards_normalized, dtype=torch.float, device=device)
+        actions = torch.tensor(actions, dtype=torch.int8, device=self.config.device)
+        old_probabilities = torch.tensor(old_probabilities, dtype=torch.float, device=self.config.device)
+        rewards = torch.tensor(rewards_normalized, dtype=torch.float, device=self.config.device)
 
         # ------------------- convert states to probabilities  ---------- #
 

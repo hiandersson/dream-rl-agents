@@ -40,7 +40,9 @@ class AgentConfig():
                 ppo_beta = .01,
                 ppo_tmax = 320,
                 ppo_gradientdescent_steps_per_epoch = 4,
-                convolutional_input=False
+                convolutional_input=False,
+                RIGHT=4,
+                LEFT=5,
                 ):
 
         # environments
@@ -111,6 +113,8 @@ class AgentConfig():
         self.ppo_beta = ppo_beta
         self.ppo_tmax = ppo_tmax
         self.ppo_gradientdescent_steps_per_epoch = ppo_gradientdescent_steps_per_epoch
+        self.RIGHT = RIGHT
+        self.LEFT = LEFT
 
     def get_dict(self):
 

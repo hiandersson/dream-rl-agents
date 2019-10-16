@@ -68,4 +68,4 @@ class CardpoleDQN(RunExperiment):
 
 if __name__ == "__main__":
     run = CardpoleDQN()
-    run.command(sys.argv[1])
+    run.command(sys.argv)

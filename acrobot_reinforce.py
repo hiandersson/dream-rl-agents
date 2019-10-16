@@ -12,7 +12,7 @@ class AcrobotREINFORCE(RunExperiment):
         return AgentConfig(
             env=env,
             n_episodes=300, 
-            target_average=-100,
+            target_average=None,
             max_t=200,
             gamma=0.92,
             fc1_units=512,
@@ -23,7 +23,7 @@ class AcrobotREINFORCE(RunExperiment):
             env=env,
             device=device,
             n_episodes=episodes, 
-            target_average=-10,
+            target_average=None,
             max_t=200,
             gamma=genome['gamma'],
             learning_rate=genome['learningRate'],
@@ -54,4 +54,4 @@ class AcrobotREINFORCE(RunExperiment):
 
 if __name__ == "__main__":
     run = AcrobotREINFORCE()
-    run.command(sys.argv[1])
+    run.command(sys.argv)
