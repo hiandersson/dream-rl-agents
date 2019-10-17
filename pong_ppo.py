@@ -12,6 +12,8 @@ class PongPPO(RunExperiment):
         return AgentConfig(
             parallelEnv=envs, 
             n_episodes=2000, 
+            learning_rate=1e-4,
+            fc1_units=256,
             RIGHT=4,
             LEFT=5,
             max_t=500)
@@ -21,6 +23,8 @@ class PongPPO(RunExperiment):
             parallelEnv=envs, 
             n_episodes=episodes, 
             device=device,
+            learning_rate=genome['learningRate'],
+            fc1_units=genome['fc1_units'],
             RIGHT=4,
             LEFT=5,
             max_t=500)
@@ -29,7 +33,7 @@ class PongPPO(RunExperiment):
         return {
             'episodes': 2,
             'GPUDevices': None,
-            'populationSize': 5,
+            'populationSize': 10,
             'retainSize': 5,
             'mutateOneGeneRandom': 5,
             'mutateTwoGenesRandom': 5,
@@ -39,16 +43,8 @@ class PongPPO(RunExperiment):
             'generations': 1,
             'randomSeed': 1,
             'allPossibleGenesSimple': {
-                'actor_learningRate': [0.01, 0.001, 0.002, 0.003, 0.004, 0.0001, 0.0005],
-                'critic_learningRate': [0.01, 0.001, 0.002, 0.003, 0.004, 0.0001, 0.0005],
-                'batchSize':    [32,64,128,256,512],
-                'gamma':        [0.90, 0.92, 0.94, 0.96, 0.98, 0.9, 0.995, 1.0],
-                'updateEvery':  [1,2,3,4],
-                'weight_decay':  [0, 1e-1, 1e-2, 1e-3],
-                'fc1_units':    [64,128,256,512],
-                'fc2_units':    [64,128,256,512],
-                'memory_size':  [int(1e4), int(1e5), int(1e6)],
-                'tau':          [1e-2, 1e-3, 1e-4],
+                'learningRate': [5e-3,1e-3,5e-4,1e-4,5e-5,1e-5],
+                'fc1_units':    [32,64,128,256,512.1024],
             },
         }
 

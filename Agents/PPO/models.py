@@ -7,7 +7,7 @@ import torch.nn.functional as F
 # P(left) = 1-P(right)
 class Policy(nn.Module):
 
-    def __init__(self):
+    def __init__(self, fc_units):
         super(Policy, self).__init__()
         
         # 80x80x2 to 38x38x4
@@ -19,8 +19,8 @@ class Policy(nn.Module):
         self.size=9*9*16
         
         # two fully connected layer
-        self.fc1 = nn.Linear(self.size, 256)
-        self.fc2 = nn.Linear(256, 1)
+        self.fc1 = nn.Linear(self.size, fc_units)
+        self.fc2 = nn.Linear(fc_units, 1)
 
         # Sigmoid to 
         self.sig = nn.Sigmoid()

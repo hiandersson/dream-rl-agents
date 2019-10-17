@@ -26,8 +26,8 @@ class PPOAgent():
 
         # ------------------- create networks  -------------------------- #
 
-        self.policy = Policy().to(self.config.device) 
-        self.optimizer = optim.Adam(self.policy.parameters(), lr=1e-4)
+        self.policy = Policy(self.config.fc1_units).to(self.config.device) 
+        self.optimizer = optim.Adam(self.policy.parameters(), lr=self.config.learning_rate)
 
     def get_checkpoint(self):
 
@@ -44,7 +44,7 @@ class PPOAgent():
 
     def load(self, filepath):
 
-        checkpoint = torch.load(filepath)
+        checkpoint = torch.load(filepath, map_location=torch.device("cuda:0" if torch.cuda.is_available() else "cpu"))
 
         self.config = self.config.from_dict_to_config(checkpoint['agent_config'])
 
