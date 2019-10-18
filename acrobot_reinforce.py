@@ -49,6 +49,12 @@ class AcrobotREINFORCE(RunExperiment):
             },
         }
 
+    def enjoy_checkpoint(self, runner, filename):
+
+         runner.enjoy_checkpoint(filename) 
+
+         pass
+
     def run(self, runner):
         return runner.run_single_probability_trajectory()
 
