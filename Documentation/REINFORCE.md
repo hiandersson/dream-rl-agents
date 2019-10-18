@@ -54,7 +54,7 @@ Acrobot is an OpenAI gym environment, defined as:
 
 #### A trained agent
 
-![Trained agent](/Checkpoints/cartpole_v1_enjoy.gif)
+![Trained agent](/Checkpoints/acrobot_v1_reinforce_train.gif)
 
 #### Hyper parameters for training
 
