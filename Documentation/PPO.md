@@ -30,7 +30,7 @@ Since we have a Markov process (where each step in the process is only depending
 
 In REINFORCE we use trajectories once and throw them away. What if we can reuse them again and again to update our policy? This would make updaing the policy much more effecient.
 
-Each single trajectory has a probability P(τ;θ) to be sampled. The same trajectory can be sampled under the new policy P(τ;θ′). If we were about to calculate the average of some quantity f(τ) we could generate trajectories from the new policy, compute f(τ) and average them out. This is mathematically the same as adding up all f(τ) weighted by a probability of sampling each trajectory under the new policy:
+Each single trajectory has a probability P(τ;θ) to be sampled. The same trajectory can be sampled under the new policy with probability P(τ;θ′). If we were about to calculate the average of some quantity f(τ) we could generate trajectories from the new policy, compute f(τ) and average them out. This is mathematically the same as adding up all f(τ) weighted by a probability of sampling each trajectory under the new policy:
 
 ![ReweightingFactor](/Documentation/PPOFactor.png)
 
