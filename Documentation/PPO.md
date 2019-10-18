@@ -25,3 +25,9 @@ In REINFORCE the rewards in each step are summed to a total reward which we then
 Since we have a Markov process (where each step in the process is only depending on the previous) the action in time t can only affect the future reward so we can igonre the past reward. So to correctly assign credit to each action a at time step t we only consider the future rewards and t.
 
 ![RFuture](/Documentation/RFuture.png)
+
+#### Importance sampling
+
+In REINFORCE we use trajectories once and throw them away. What if we can reuse them again and again to update our policy? This would make updaing the policy much more effecient.
+
+In REINFORCE each trajectory had the probability P(τ;θ) to be samples. The same trajectory can be sampled under the new policy P(τ;θ′)
