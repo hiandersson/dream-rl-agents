@@ -38,4 +38,16 @@ As a final step for the REINFORCE algorithm where we have collected all trajecto
 
 - M is the number of trajectories. We average out the gradients by using a scaling factor of 1/M.
 
+#### Hyper parameters for training
+
+Some of the core hyper parameters used:
+
+````
+gamma=0.92,                   # Gamma / discount factor
+learning_rate=0.002,          # Learning rate
+fc1_units=512,                # Number of neurons in the first hidden layer
+````
+
+#### Plot of rewards over time
+
 ![Training](/Documentation/acrobot-v1_train_plot.png)
