@@ -38,3 +38,4 @@ By multiplying and dividing by the same number, P(τ;θ) and rearrange the terms
 
 ![ReweightingFactor](/Documentation/PPOReweightingFactor.png)
 
+By doing this we can use old trajectories for computing averages for new policy, as long as we add this extra re-weighting factor, that takes into account how under or over–represented each trajectory is under the new policy compared to the old one.
