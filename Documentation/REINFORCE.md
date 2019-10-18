@@ -42,13 +42,11 @@ As a final step for the REINFORCE algorithm where we have collected all trajecto
 
 #### Environement
 
-CartPole is an OpenAI gym environment, defined as:
+Acrobot is an OpenAI gym environment, defined as:
 
-"A pole is attached by an un-actuated joint to a cart, which moves along a frictionless track. The system is controlled by applying a force of +1 or -1 to the cart. The pendulum starts upright, and the goal is to prevent it from falling over. A reward of +1 is provided for every timestep that the pole remains upright. The episode ends when the pole is more than 15 degrees from vertical, or the cart moves more than 2.4 units from the center."
+"The acrobot system includes two joints and two links, where the joint between the two links is actuated. Initially, the links are hanging downwards, and the goal is to swing the end of the lower link up to a given height."
 
-The environment is "solved" as:
-
-"CartPole-v1 defines "solving" as getting average reward of 475.0 over 100 consecutive trials."
+"Acrobot-v1 is an unsolved environment, which means it does not have a specified reward threshold at which it's considered solved."
 
 #### A random agent
 
