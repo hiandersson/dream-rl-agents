@@ -24,3 +24,4 @@ In REINFORCE the rewards in each step are summed to a total reward which we then
 
 Since we have a Markov process (where each step in the process is only depending on the previous) the action in time t can only affect the future reward so we can igonre the past reward. So to correctly assign credit to each action a at time step t we only consider the future rewards and t.
 
+![RFuture](/Documentation/RFuture.png)
