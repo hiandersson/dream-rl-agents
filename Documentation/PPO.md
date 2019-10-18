@@ -13,3 +13,5 @@ Building on vanilla policy gradients like REINFORCE, three major challenges aris
 ### Improvements to REINFORCE
 
 #### Noise reduction
+
+The easiest option to reduce noise is to sample more trajectories in parallel and average them out. This also gives the advantage of distributed computing since agent enviroment can be run on parallel threads or computers.
