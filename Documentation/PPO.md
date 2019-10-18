@@ -32,5 +32,9 @@ In REINFORCE we use trajectories once and throw them away. What if we can reuse 
 
 Each single trajectory has a probability P(τ;θ) to be sampled. The same trajectory can be sampled under the new policy P(τ;θ′). If we were about to compute the average of all samples trajectories under the new policy we could sample them and average them out. Mathematically this is the same as adding all trajectories together and then multiply them by a weighting factor:
 
+![ReweightingFactor](/Documentation/PPOFactor.png)
+
+
+
 ![ReweightingFactor](/Documentation/PPOReweightingFactor.png)
 
