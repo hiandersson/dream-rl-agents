@@ -1,6 +1,6 @@
 # Proximal Policy Optimization
 
-#### Motivation
+### Motivation
 
 Building on vanilla policy gradients like REINFORCE, three major challenges arises:
 
@@ -9,3 +9,7 @@ Building on vanilla policy gradients like REINFORCE, three major challenges aris
 - The gradient g is very noisy. The single trajectory we a sampled by chance may not be reprasentive of our policy.
 
 - No clear credit assignment for each action. A trajectory may contain good and bad actions and reinforcing these depend on the final outcome.
+
+### Improvements to REINFORCE
+
+#### Noise reduction
