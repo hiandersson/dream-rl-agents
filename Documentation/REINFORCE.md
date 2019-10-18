@@ -37,3 +37,5 @@ As a final step for the REINFORCE algorithm where we have collected all trajecto
 ![Gradient](/Documentation/REINFORCE_Gradients.png)
 
 - M is the number of trajectories. We average out the gradients by using a scaling factor of 1/M.
+
+![Training](/Documentation/acrobot-v1_train_plot.png)
