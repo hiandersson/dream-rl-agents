@@ -30,4 +30,6 @@ Since we have a Markov process (where each step in the process is only depending
 
 In REINFORCE we use trajectories once and throw them away. What if we can reuse them again and again to update our policy? This would make updaing the policy much more effecient.
 
-In REINFORCE each trajectory had the probability P(τ;θ) to be samples. The same trajectory can be sampled under the new policy P(τ;θ′)
+In REINFORCE each trajectory had the probability P(τ;θ) to be samples. The same trajectory can be sampled under the new policy P(τ;θ′).
+
+
