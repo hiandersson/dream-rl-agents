@@ -32,4 +32,5 @@ In REINFORCE we use trajectories once and throw them away. What if we can reuse 
 
 In REINFORCE each trajectory had the probability P(τ;θ) to be samples. The same trajectory can be sampled under the new policy P(τ;θ′).
 
+![ReweightingFactor](/Documentation/ReweightingFactor.png)
 
