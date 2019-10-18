@@ -38,6 +38,8 @@ As a final step for the REINFORCE algorithm where we have collected all trajecto
 
 - M is the number of trajectories. We average out the gradients by using a scaling factor of 1/M.
 
+# Experiment and result - Acrobot
+
 #### Hyper parameters for training
 
 Some of the core hyper parameters used:
