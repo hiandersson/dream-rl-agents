@@ -20,7 +20,7 @@ The easiest option to reduce noise is to sample more trajectories in parallel an
 
 #### Credit assigment
 
-In REINFORCE the rewards in each step are summed to a total reward which we then use to calculate the gradient. This gives the credit assignment problem since good and bad actions are bunched up together.
+In REINFORCE the rewards in each step are added to a total reward which we then use to calculate the gradient. This gives the credit assignment problem since good and bad actions are bunched up together.
 
 Since we have a Markov process (where each step in the process is only depending on the previous) the action in time t can only affect the future reward so we can igonre the past reward. So to correctly assign credit to each action a at time step t we only consider the future rewards and t.
 
