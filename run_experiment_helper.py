@@ -72,7 +72,7 @@ class RunExperiment():
 
         runner = Runner(agent, verbose=1, pbar=pbar) # Create a runner that runs the agent in the environment
         score, checkpoint = self.run(runner)  # Run the agent
-        
+
         if self.parallelEnvs == True:
             envs.close()
         else:

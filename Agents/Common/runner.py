@@ -219,11 +219,50 @@ class Runner():
             # probs will only be used as the pi_old
             # no gradient propagation is needed
             # so we move it to the cpu
+
+            #print("batch_input = {}".format(batch_input.shape))
+            #ac(0)
+
+
+            action, probs = policy.act(batch_input)
+
+            probs = probs.cpu().detach().numpy()
+
+
+
+            """
+            print("probs {} type {}".format(probs, type(probs))) # numpy.ndarray
+
+            print("action {} type {}".format(action, type(action))) # numpy.ndarray
+
+            ac(0)
+            """
+
+            """
             probs = policy(batch_input).squeeze().cpu().detach().numpy()
+            print("1 probs {} type {}".format(probs, type(probs))) # numpy.ndarray
             
             action = np.where(np.random.rand(n) < probs, self.agent.config.RIGHT, self.agent.config.LEFT)
+            print(action)
+            print("1 action {} type {}".format(action, type(action))) # numpy.ndarray
+
             probs = np.where(action==self.agent.config.RIGHT, probs, 1.0-probs)
+            print(probs)
+            print("2 probs {} type {}".format(probs, type(probs))) # numpy.ndarray
+            ac(0)
+            """
+
+
+            """
+            probs = policy(batch_input).squeeze().cpu().detach().numpy()
+            action = np.where(np.random.rand(n) < probs, self.agent.config.RIGHT, self.agent.config.LEFT)
+            probs = np.where(action==self.agent.config.RIGHT, probs, 1.0-probs)
+            """
             
+            #print("probs = {}".format(probs))
+            #ac(0)
+
+
             # advance the game (0=no action)
             # we take one action and skip game forward
             fr1, re1, is_done, _ = envs.step(action)
