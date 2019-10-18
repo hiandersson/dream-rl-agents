@@ -1,4 +1,4 @@
-# Proximal Policy Optimization
+# REINFORCE and policy gradient methods
 
 #### Policy gradient methods
 
