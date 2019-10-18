@@ -34,7 +34,7 @@ Each single trajectory has a probability P(τ;θ) to be sampled. The same trajec
 
 ![ReweightingFactor](/Documentation/PPOFactor.png)
 
-By multiplying and dividing by the same number, P(\tau;\theta)P(τ;θ) and rearrange the terms.
+By multiplying and dividing by the same number, P(τ;θ) and rearrange the terms:
 
 ![ReweightingFactor](/Documentation/PPOReweightingFactor.png)
 
