@@ -34,7 +34,7 @@ In statistics, weighting factors is used to make a sample matching a population.
 
 In a similar way we will use reweighting factors that takes into account how under or over–represented each trajectory is under the new policy compared to the old one. In his way we can use old trajectories for computing averages for our new policy. 
 
-**We will use a "reweighting trick" here.** Each single trajectory has a probability P(τ;θ) to be sampled. The same trajectory can be sampled under the new policy with probability P(τ;θ′). If we were about to calculate the average of some quantity f(τ) we could generate trajectories from the new policy, compute f(τ) and average them out. This is mathematically the same as adding up all f(τ) weighted by a probability of sampling each trajectory under the new policy:
+So we begin with that each single trajectory has a probability P(τ;θ) to be sampled. The same trajectory can be sampled under the new policy with probability P(τ;θ′). If we were about to calculate the average of some quantity f(τ) we could generate trajectories from the new policy, compute f(τ) and average them out. This is mathematically the same as adding up all f(τ) weighted by a probability of sampling each trajectory under the new policy:
 
 ![ReweightingFactor](/Documentation/PPOFactor.png)
 
