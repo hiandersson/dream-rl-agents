@@ -41,3 +41,7 @@ So we begin with that each single trajectory has a probability P(τ;θ) to be sa
 By multiplying and dividing by the same number, P(τ;θ) and rearrange the terms:
 
 ![ReweightingFactor](/Documentation/PPOReweightingFactor.png)
+
+If we take a look a the full reweighting factor
+
+![ReweightingFactor](/Documentation/PPOReweightingFull.png)
