@@ -73,3 +73,7 @@ Now we have an approximate form of the gradient we can think of it as the gradie
 We can use this function to peform gradient ascent (maximize the expected future reward in each step of the trajectory by increasing the probability for actions that leads to a higher reward).
 
 One problem with this is our new policy might start to differ too much from the old one so our approximation that does not hold anymore (remember that we simplified our expression above with the assumption that the factors are close to 1).
+
+#### Keeping things in check with the clipped surrogate function
+
+If the approximation does not hold anymore (the ratio being close to 1) this can lead to a really bad policy.
