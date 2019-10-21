@@ -70,4 +70,4 @@ Now we have an approximate form of the gradient we can think of it as the gradie
 
 ![ReweightingFactor](/Documentation/PPOSurrogate.png)
 
-We can use this function to peform gradient ascent (maximize the expected future reward by increasing the proability for actions that leads to a higher reward).
+We can use this function to peform gradient ascent (maximize the expected future reward in each step of the trajectory by increasing the probability for actions that leads to a higher reward).
