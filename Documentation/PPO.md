@@ -82,3 +82,10 @@ The way to make the ratio stay close to 1 and make the approximation hold is to 
 
 ![Clipped surrogate](/Documentation/PPOClippedSurrogate.png)
 
+#### Algorithm
+
+1. Collect trajectories using policy π(θ)
+2. Compute the gradient of the clipped surrogate function using the collected trajectories
+3. Update the θ' using gradient ascent of the clipped surrogate function
+4. Repeat step 2 - 3 reusing old trajectories
+5. Set θ to θ'
