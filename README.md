@@ -5,7 +5,7 @@
 - Implements Deep Q Learning, Deep Deterministic Policy Gradients and Proximal Policy Optimization
 - Adds several additional features like Prioritized Experience Replay and Dueling Networks etc.
 - "Solves" OpenAI's gym environments in example files
-- Not meant for production. Can contain subtle bugs. Use OpenAI's baselines instead.
+- Not meant for production, may contain subtle bugs. Use stable-baselines instead https://github.com/hill-a/stable-baselines
 
 ## Agents
 
