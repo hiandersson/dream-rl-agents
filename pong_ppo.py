@@ -11,7 +11,7 @@ class PongPPO(RunExperiment):
     def get_agent_train_config(self, envs):
         return AgentConfig(
             parallelEnv=envs, 
-            n_episodes=2000, 
+            n_episodes=1000, 
             learning_rate=1e-4,
             fc1_units=256,
             RIGHT=4,
