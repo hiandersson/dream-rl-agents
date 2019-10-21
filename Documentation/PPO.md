@@ -63,3 +63,7 @@ We can cancel out some terms but are still left with ...
 When the factors between the old and the new policy gets close to 1 we can simply the expression even more. This is why it is called "proximal policy optimization":
 
 ![ReweightingFactor](/Documentation/PPOGradient.png)
+
+#### Surrogate function
+
+Now we have an approximate form of the gradient we can think of it as the gradient of a new object and call it the surrogate function:
