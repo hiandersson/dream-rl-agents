@@ -68,7 +68,7 @@ When the factors between the old and the new policy gets close to 1 we can simpl
 
 Now we have an approximate form of the gradient we can think of it as the gradient of a new object and call it the surrogate function:
 
-![ReweightingFactor](/Documentation/PPOSurrogate.png)
+![Surrogate function](/Documentation/PPOSurrogate.png)
 
 We can use this function to peform gradient ascent (maximize the expected future reward in each step of the trajectory by increasing the probability for actions that leads to a higher reward).
 
@@ -77,3 +77,6 @@ One problem with this is our new policy might start to differ too much from the 
 #### Keeping things in check with the clipped surrogate function
 
 If the approximation does not hold anymore (the ratio being close to 1) this can lead to a really bad policy.
+
+![Clipped surrogate](/Documentation/PPOClippedSurrogate.png)
+
