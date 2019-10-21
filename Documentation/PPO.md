@@ -50,12 +50,16 @@ But, if we take a look a the full reweighting factor ..
 
 .. the formula above is a chain of products. If some policy gets close to 0 the reweighting factor gets close to zero. If some policy gets close to 1 over 0 it deverges to infitity. 
 
-#### The surrogate function and how we update the policy gradient
+#### Proximal policy and how to update the gradient
 
 To update the gradient we can use the gradient update from REINFORCE times the reweighting factor calculated when doing importance sampling:
 
 ![ReweightingFactor](/Documentation/PPOReweightingPolicyGradient.png)
 
+We can cancel out some terms but are still left with ...
+
 ![ReweightingFactor](/Documentation/PPOCancelTerms.png)
+
+To simplify the expression even more we can 
 
 ![ReweightingFactor](/Documentation/PPOGradient.png)
