@@ -18,7 +18,7 @@ The easiest option to reduce noise is to sample more trajectories in parallel an
 
 ![Parallel trajectories](/Documentation/PPOParallelTrajectories.png)
 
-#### Use credit assigment to reinforce 'good' actions
+#### Use credit assigment to reinforce "good" actions
 
 In REINFORCE, rewards in each step are added to a total reward which we then use to calculate the gradient. This gives the credit assignment problem since good and bad actions are bunched up together.
 
