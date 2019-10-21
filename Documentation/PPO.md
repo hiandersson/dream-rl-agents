@@ -18,7 +18,7 @@ The easiest option to reduce noise is to sample more trajectories in parallel an
 
 ![Parallel trajectories](/Documentation/PPOParallelTrajectories.png)
 
-#### Credit assigment to reinforce 'good' actions
+#### Use credit assigment to reinforce 'good' actions
 
 In REINFORCE the rewards in each step are added to a total reward which we then use to calculate the gradient. This gives the credit assignment problem since good and bad actions are bunched up together.
 
@@ -26,7 +26,7 @@ Since we have a Markov process (where each step in the process is only depending
 
 ![RFuture](/Documentation/RFuture.png)
 
-#### Importance sampling so we can reuse old policies
+#### Use importance sampling so we can reuse old policies
 
 In REINFORCE we use trajectories once and throw them away. What if we can reuse them again and again to update our policy? This would make updaing the policy much more effecient.
 
