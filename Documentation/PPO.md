@@ -42,7 +42,7 @@ By multiplying and dividing by the same number, P(τ;θ) and rearrange the terms
 
 ![ReweightingFactor](/Documentation/PPOReweightingFactor.png)
 
-#### How we update the gradient and the surrogate function
+#### The surrogate function and how we update the policy gradient
 
 If we take a look a the full reweighting factor
 
