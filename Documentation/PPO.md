@@ -52,8 +52,10 @@ But, if we take a look a the full reweighting factor ..
 
 #### The surrogate function and how we update the policy gradient
 
-![ReweightingFactor](/Documentation/PPOCancelTerms.png)
+To update the gradient we can use the gradient update from REINFORCE times the reweighting factor calculated when doing importance sampling:
 
 ![ReweightingFactor](/Documentation/PPOReweightingPolicyGradient.png)
+
+![ReweightingFactor](/Documentation/PPOCancelTerms.png)
 
 ![ReweightingFactor](/Documentation/PPOGradient.png)
