@@ -42,7 +42,7 @@ By multiplying and dividing by the same number, P(τ;θ) and rearrange the terms
 
 ![ReweightingFactor](/Documentation/PPOReweightingFactor.png)
 
-And now we have the factors that takes into account how under or over–represented each trajectory is.
+And now we have the reweighting factors that takes into account how under or over–represented each trajectory is.
 
 But, if we take a look a the full reweighting factor:
 
