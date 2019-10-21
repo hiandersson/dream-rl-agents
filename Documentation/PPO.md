@@ -64,7 +64,7 @@ When the factors between the old and the new policy gets close to 1 we can simpl
 
 ![ReweightingFactor](/Documentation/PPOGradient.png)
 
-#### The approximate gradient function, also called the 'Surrogate function'
+#### The approximate gradient function, also called the "surrogate function"
 
 Now we have an approximate form of the gradient we can think of it as the gradient of a new object and call it the surrogate function:
 
