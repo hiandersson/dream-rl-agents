@@ -85,7 +85,8 @@ from Agents.DDPG import DDPGAgent
 from Agents.Common import AgentConfig
 from Agents.Common import Runner
 
-# Create environment
+# Create an agent that solves the environment:
+# - LunarLanderContinuous-v2 defines "solving" as getting average reward of 200 over 100 consecutive trials."
 env = gym.make("LunarLanderContinuous-v2")
 
 # Create the agent
