@@ -78,7 +78,7 @@ One problem with this is our new policy might start to differ too much from the 
 
 If the approximation does not hold anymore (the ratio being close to 1) this can lead to a really bad policy. When the policy changes by a large amount it is easy that we run over a cliff (from being at the peak of expected future reward, from the policy perspective). After that we might be stuck in a flat bottom and not be able to recover.
 
-The way to solve this problem is to 
+The way to make the ratio stay close to 1 and make the approximation hold is to introduce a clipping functionality, defined by [1−ϵ,1+ϵ] where epsilon is small (typically between 0.1 and 0.2).
 
 ![Clipped surrogate](/Documentation/PPOClippedSurrogate.png)
 
