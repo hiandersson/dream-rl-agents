@@ -46,6 +46,6 @@ If we take a look a the full reweighting factor
 
 ![ReweightingFactor](/Documentation/PPOReweightingFull.png)
 
-The formula above is a chain of products. If some policy gets close to 0 the reweighting factor gets close to zero. If some policy gets close to 1 over 0 it deverges to infitity.
+The formula above is a chain of products. One problem that comes with this is if some policy gets close to 0 the reweighting factor gets close to zero. If some policy gets close to 1 over 0 it deverges to infitity.
 
 ![ReweightingFactor](/Documentation/PPOGradient.png)
