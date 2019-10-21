@@ -60,6 +60,6 @@ We can cancel out some terms but are still left with ...
 
 ![ReweightingFactor](/Documentation/PPOCancelTerms.png)
 
-Even the factors between the old and the new policy gets close to 1 we can simply the expression even more. This is why it is called "proximal policy optimization":
+When the factors between the old and the new policy gets close to 1 we can simply the expression even more. This is why it is called "proximal policy optimization":
 
 ![ReweightingFactor](/Documentation/PPOGradient.png)
