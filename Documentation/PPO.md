@@ -26,7 +26,7 @@ Since we have a Markov process (where each step in the process is only depending
 
 ![RFuture](/Documentation/RFuture.png)
 
-#### Use importance sampling so we can reuse old policies
+#### Use importance sampling to reuse old policies
 
 In REINFORCE we use trajectories once and throw them away. What if we can reuse them again and again to update our policy? This would make updaing the policy much more effecient.
 
@@ -42,12 +42,12 @@ By multiplying and dividing by the same number, P(τ;θ) and rearrange the terms
 
 ![ReweightingFactor](/Documentation/PPOReweightingFactor.png)
 
-#### The surrogate function and how we update the policy gradient
-
 If we take a look a the full reweighting factor
 
 ![ReweightingFactor](/Documentation/PPOReweightingFull.png)
 
 The formula above is a chain of products. One problem that comes with this is if some policy gets close to 0 the reweighting factor gets close to zero. If some policy gets close to 1 over 0 it deverges to infitity.
+
+#### The surrogate function and how we update the policy gradient
 
 ![ReweightingFactor](/Documentation/PPOGradient.png)
