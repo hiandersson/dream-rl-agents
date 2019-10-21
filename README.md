@@ -9,6 +9,7 @@
 
 ## Agents
 
+The following agents have been implemented:
 - Deep Q Learning including Double Q Learning, Dueling Networks and Prioritized Experience Replay
 - Deep Deterministic Policy Gradients
 - REINFORCE
@@ -22,7 +23,7 @@
 
 #### Documentation
 
-[Article about Deep Q Learning](/Documentation/DQN.md)
+[Go to article about Deep Q Learning](/Documentation/DQN.md)
 
 #### How to use
 
