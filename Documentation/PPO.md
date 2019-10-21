@@ -52,7 +52,7 @@ But, if we take a look a the full reweighting factor ..
 
 #### Proximal policy and how to update the gradient
 
-To update the gradient we can use the gradient update from REINFORCE times the reweighting factor calculated when doing importance sampling:
+To update the gradient we can use the formula from REINFORCE times the reweighting factor calculated when doing importance sampling:
 
 ![ReweightingFactor](/Documentation/PPOReweightingPolicyGradient.png)
 
