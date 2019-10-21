@@ -89,3 +89,24 @@ The way to make the ratio stay close to 1 and make the approximation hold is to 
 3. Update the θ' using gradient ascent of the clipped surrogate function
 4. Repeat step 2 - 3 reusing old trajectories
 5. Set θ to θ'
+
+#### A random agent
+
+![Random agent](/Checkpoints/cartpole_v1_random.gif)
+
+#### A trained agent
+
+![Trained agent](/Checkpoints/cartpole_v1_enjoy.gif)
+
+#### Hyper parameters for training
+
+Some of the core hyper parameters used:
+
+````
+learning_rate=1e-4,           # Learning rate
+fc1_units=256,                # Number of neurons in the first hidden layer
+````
+
+#### Plot of rewards over time
+
+![Plot](/Checkpoints/pongdeterministic-v4_train_plot.png)
