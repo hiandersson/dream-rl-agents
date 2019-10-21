@@ -92,7 +92,7 @@ The way to make the ratio stay close to 1 and make the approximation hold is to 
 
 #### A random agent
 
-![Random agent](/Checkpoints/cartpole_v1_random.gif)
+![Random agent](/Checkpoints/pongdeterministic-v4_random.gif)
 
 #### A trained agent
 
