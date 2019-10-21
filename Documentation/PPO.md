@@ -30,7 +30,7 @@ Since we have a Markov process (where each step in the process is only depending
 
 In REINFORCE we use trajectories once and throw them away. What if we can reuse them again and again to update our policy? This would make updaing the policy much more effecient.
 
-In statistics, weighting factors is used to make a sample matching a population. For example, when sampling from a population we can use census data to understand that the balance between females and males should 51% and 49%. If a smaller sample from the population had a balance of 60% and 40% we need to add factor weights to the female and males so it becomes a reprasensitive set, matching the census data. 
+In statistics, weighting factors is used to make a sample matching a population. For example, when sampling from a population we can use census data to understand that the balance between females and males should be 51% and 49%. If a smaller sample from the population had a balance of 60% and 40% we need to add factor weights to the female and males so it becomes a reprasensitive set, matching the census data. 
 
 In a similar way we will use reweighting factors that takes into account how under or over–represented each trajectory is under the new policy compared to the old one. In his way we can use old trajectories for computing averages for our new policy. 
 
