@@ -17,7 +17,7 @@ The following agents have been implemented and documented:
 
 ### Deep Q Learning agent
 
-#### A trained agent
+#### A trained CartPole agent
 
 ![Trained agent](/Checkpoints/cartpole_v1_enjoy.gif)
 
@@ -66,7 +66,7 @@ env.close()
 
 ### Deep Deterministic Policy Gradients agent
 
-#### A trained agent
+#### A trained LunarLander agent
 
 ![Trained agent](/Checkpoints/lunarlander-v2-enjoy.gif)
 
