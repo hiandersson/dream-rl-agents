@@ -76,7 +76,9 @@ One problem with this is our new policy might start to differ too much from the 
 
 #### Keeping things in check with the clipped surrogate function
 
-If the approximation does not hold anymore (the ratio being close to 1) this can lead to a really bad policy.
+If the approximation does not hold anymore (the ratio being close to 1) this can lead to a really bad policy. When the policy changes by a large amount it is easy that we run over a cliff (from being at the peak of expected future reward, from the policies perspective). After that we might be stuck in a flat bottom and not be able to recover.
+
+The way to solve this problem is to 
 
 ![Clipped surrogate](/Documentation/PPOClippedSurrogate.png)
 
