@@ -10,9 +10,9 @@
 ## Agents
 
 The following agents have been implemented and documented:
-- Deep Q Learning including Double Q Learning, Dueling Networks and Prioritized Experience Replay
-- Deep Deterministic Policy Gradients
-- Proximal Policy Gradients
+- DQN - Deep Q Learning including Double Q Learning, Dueling Networks and Prioritized Experience Replay
+- DDPG - Deep Deterministic Policy Gradients
+- PPO - Proximal Policy Gradients
 - REINFORCE (mostly as a precursor to PPO)
 
 ### Deep Q Learning agent
