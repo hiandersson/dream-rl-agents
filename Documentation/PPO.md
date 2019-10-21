@@ -105,6 +105,8 @@ Some of the core hyper parameters used:
 ````
 learning_rate=1e-4,           # Learning rate
 fc1_units=256,                # Number of neurons in the first hidden layer
+ppo_epsilon=0.1,              # Epsilon at start
+ppo_sgd_steps_per_episode=4,  # Stochastic gradient steps per episode
 ````
 
 #### Plot of rewards over time
