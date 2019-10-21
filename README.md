@@ -9,7 +9,7 @@
 
 ## Agents
 
-The following agents have been implemented:
+The following agents have been implemented and documented:
 - Deep Q Learning including Double Q Learning, Dueling Networks and Prioritized Experience Replay
 - Deep Deterministic Policy Gradients
 - REINFORCE
