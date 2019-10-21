@@ -48,8 +48,12 @@ But, if we take a look a the full reweighting factor ..
 
 ![ReweightingFactor](/Documentation/PPOReweightingFull.png)
 
-.. the formula above is a chain of products. If some policy gets close to 0 the reweighting factor gets close to zero. If some policy gets close to 1 over 0 it deverges to infitity.
+.. the formula above is a chain of products. If some policy gets close to 0 the reweighting factor gets close to zero. If some policy gets close to 1 over 0 it deverges to infitity. 
 
 #### The surrogate function and how we update the policy gradient
+
+![ReweightingFactor](/Documentation/PPOCancelTerms.png)
+
+![ReweightingFactor](/Documentation/PPOReweightingPolicyGradient.png)
 
 ![ReweightingFactor](/Documentation/PPOGradient.png)
