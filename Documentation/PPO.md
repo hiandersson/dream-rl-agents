@@ -42,6 +42,8 @@ By multiplying and dividing by the same number, P(τ;θ) and rearrange the terms
 
 ![ReweightingFactor](/Documentation/PPOReweightingFactor.png)
 
+#### How we update the gradient and the surrogate function
+
 If we take a look a the full reweighting factor
 
 ![ReweightingFactor](/Documentation/PPOReweightingFull.png)
