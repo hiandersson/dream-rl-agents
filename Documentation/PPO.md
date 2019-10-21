@@ -12,13 +12,13 @@ Building on vanilla policy gradients like REINFORCE, three major challenges aris
 
 ### Improvements to REINFORCE
 
-#### Noise reduction
+#### Sample parallel trajectories to reduce noise
 
 The easiest option to reduce noise is to sample more trajectories in parallel and average them out. This also gives the advantage of distributed computing since agent enviroment can be run on parallel threads or computers.
 
 ![Parallel trajectories](/Documentation/PPOParallelTrajectories.png)
 
-#### Credit assigment
+#### Credit assigment to reinforce 'good' actions
 
 In REINFORCE the rewards in each step are added to a total reward which we then use to calculate the gradient. This gives the credit assignment problem since good and bad actions are bunched up together.
 
@@ -26,7 +26,7 @@ Since we have a Markov process (where each step in the process is only depending
 
 ![RFuture](/Documentation/RFuture.png)
 
-#### Importance sampling
+#### Importance sampling so we can reuse old policies
 
 In REINFORCE we use trajectories once and throw them away. What if we can reuse them again and again to update our policy? This would make updaing the policy much more effecient.
 
