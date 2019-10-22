@@ -1,4 +1,4 @@
-![Logo](/Documentation/Logo1.png)
+![Logo](/Documentation/Logo2.png)
 
 ## What is Dream RL Agents?
 - An open source library for deep reinforcement learning agents
