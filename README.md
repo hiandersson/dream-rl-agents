@@ -126,7 +126,7 @@ env.close()
 
 #### A trained LunarLander agent
 
-![Trained agent](/Checkpoints/lunarlander-v2-enjoy.gif)
+![Trained agent](/Checkpoints/pongdeterministic-v4_train.gif)
 
 #### Documentation
 
