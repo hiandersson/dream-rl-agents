@@ -11,8 +11,7 @@
 
 The following agents have been implemented and documented:
 - DDPG - Deep Deterministic Policy Gradients
-- PPO - Proximal Policy Gradients
-- REINFORCE (mostly as a precursor to PPO)
+- PPO & REINFORCE - Proximal Policy Gradients (REINFORCE implemented as a precursor to PPO)
 - DQN - Deep Q Learning including Double Q Learning, Dueling Networks and Prioritized Experience Replay
 
 ### Deep Deterministic Policy Gradients agent
