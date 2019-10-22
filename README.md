@@ -6,7 +6,7 @@
 - Code and articles written to be easy to understand and learn from
 - "Solves" OpenAI's gym environments in example files
 
-## Agents
+# Agents
 
 The following agents have been implemented and documented:
 - DDPG - Deep Deterministic Policy Gradients
