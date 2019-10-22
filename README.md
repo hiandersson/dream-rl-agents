@@ -1,7 +1,7 @@
 
 <img src="Documentation/Logo1.png" width=45%/>
 
-## What is this?
+### What is this?
 - An open source library for deep reinforcement learning agents
 - Code and articles written to be easy to understand and learn from
 - "Solves" OpenAI's gym environments in example files
