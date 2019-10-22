@@ -11,11 +11,13 @@ class PongPPO(RunExperiment):
     def get_agent_train_config(self, envs):
         return AgentConfig(
             parallelEnv=envs, 
-            n_episodes=1000, 
-            learning_rate=1e-4,
+            n_episodes=1500, 
+            learning_rate=3e-4,
             fc1_units=256,
-            RIGHT=4,
-            LEFT=5,
+            ppo_epsilon=0.1,
+            ppo_sgd_steps_per_episode=4,
+            ACTION_0=4,
+            ACTION_1=5,
             max_t=500)
 
     def get_agent_evolve_config(self, envs, genome, device, episodes):
@@ -25,8 +27,8 @@ class PongPPO(RunExperiment):
             device=device,
             learning_rate=genome['learningRate'],
             fc1_units=genome['fc1_units'],
-            RIGHT=4,
-            LEFT=5,
+            ACTION_0=4,
+            ACTION_1=5,
             max_t=500)
 
     def get_evolver_config(self):

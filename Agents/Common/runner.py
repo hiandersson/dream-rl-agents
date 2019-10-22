@@ -141,8 +141,8 @@ class Runner():
         env = self.agent.config.env
         policy = self.agent.policy
 
-        self.agent.config.RIGHT = 4
-        self.agent.config.LEFT = 5
+        self.agent.config.ACTION_0 = 4
+        self.agent.config.ACTION_1 = 5
 
         while True:
         
@@ -167,8 +167,8 @@ class Runner():
                 # so we move it to the cpu
                 probs = policy(batch_input).squeeze().cpu().detach().numpy()
                 
-                action = np.where(np.random.rand(1) < probs, self.agent.config.RIGHT, self.agent.config.LEFT)
-                probs = np.where(action==self.agent.config.RIGHT, probs, 1.0-probs)
+                action = np.where(np.random.rand(1) < probs, self.agent.config.ACTION_0, self.agent.config.ACTION_1)
+                probs = np.where(action==self.agent.config.ACTION_0, probs, 1.0-probs)
                 
                 # advance the game (0=no action)
                 # we take one action and skip game forward
@@ -205,7 +205,7 @@ class Runner():
         
         # perform nrand random steps
         for _ in range(nrand):
-            fr1, re1, _, _ = envs.step(np.random.choice([self.agent.config.RIGHT, self.agent.config.LEFT],n))
+            fr1, re1, _, _ = envs.step(np.random.choice([self.agent.config.ACTION_0, self.agent.config.ACTION_1],n))
             fr2, re2, _, _ = envs.step([0]*n)
         
         for t in range(self.agent.config.max_t):
@@ -221,8 +221,8 @@ class Runner():
             # so we move it to the cpu
 
             probs = policy(batch_input).squeeze().cpu().detach().numpy()
-            action = np.where(np.random.rand(n) < probs, self.agent.config.RIGHT, self.agent.config.LEFT)
-            probs = np.where(action==self.agent.config.RIGHT, probs, 1.0-probs)
+            action = np.where(np.random.rand(n) < probs, self.agent.config.ACTION_0, self.agent.config.ACTION_1)
+            probs = np.where(action==self.agent.config.ACTION_0, probs, 1.0-probs)
 
             # advance the game (0=no action)
             # we take one action and skip game forward

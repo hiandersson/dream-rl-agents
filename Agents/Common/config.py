@@ -35,14 +35,12 @@ class AgentConfig():
                 weight_decay=0,
                 ou_noise_sigma=0.01,
                 ou_noise_active=True,
-                ppo_discount_rate = .99,
                 ppo_epsilon = 0.1,
                 ppo_beta = .01,
-                ppo_tmax = 320,
-                ppo_gradientdescent_steps_per_epoch = 4,
+                ppo_sgd_steps_per_episode = 4,
                 convolutional_input=False,
-                RIGHT=4,
-                LEFT=5,
+                ACTION_0=4,
+                ACTION_1=5,
                 ):
 
         # environments
@@ -108,13 +106,11 @@ class AgentConfig():
         self.ou_noise_sigma = ou_noise_sigma
 
         # ppo
-        self.ppo_discount_rate = ppo_discount_rate
         self.ppo_epsilon = ppo_epsilon
         self.ppo_beta = ppo_beta
-        self.ppo_tmax = ppo_tmax
-        self.ppo_gradientdescent_steps_per_epoch = ppo_gradientdescent_steps_per_epoch
-        self.RIGHT = RIGHT
-        self.LEFT = LEFT
+        self.ppo_sgd_steps_per_episode = ppo_sgd_steps_per_episode
+        self.ACTION_0 = ACTION_0
+        self.ACTION_1 = ACTION_1
 
     def get_dict(self):
 

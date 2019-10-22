@@ -93,7 +93,7 @@ class PPOAgent():
         # ------------------- convert states to probabilities  ---------- #
 
         new_probabilities = self.states_to_probabilities(policy, states)
-        new_probabilities = torch.where(actions == self.config.RIGHT, new_probabilities, 1.0-new_probabilities)
+        new_probabilities = torch.where(actions == self.config.ACTION_0, new_probabilities, 1.0-new_probabilities)
 
         # ------------------- ratio for clipping  ----------------------- #
 
@@ -121,7 +121,7 @@ class PPOAgent():
 
         # ------------------- gradient ascent step  ---------------------- #
 
-        for _ in range(self.config.ppo_gradientdescent_steps_per_epoch):
+        for _ in range(self.config.ppo_sgd_steps_per_episode):
             
             # gradient ascent of the clipped surrogate function
             L = -self.clipped_surrogate(self.policy, old_probabilities, states, actions, rewards, epsilon=self.epsilon, beta=self.config.ppo_beta)
