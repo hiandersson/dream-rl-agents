@@ -74,7 +74,7 @@ env.close()
 
 ### Proximal Policy Optimization agent
 
-#### A trained LunarLander agent
+#### A trained Pong agent
 
 ![Trained agent](/Checkpoints/pongdeterministic-v4_train.gif)
 
