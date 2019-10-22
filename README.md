@@ -1,5 +1,5 @@
 
-<img src="Documentation/Logo1.png" width=45%/>
+<img src="Documentation/Logo2.png" width=45%/>
 
 ### What is this?
 - An open source library for deep reinforcement learning agents
@@ -7,7 +7,7 @@
 - "Solves" OpenAI's gym environments in example files
 - Not meant for production, may contain subtle bugs. Use stable-baselines instead https://github.com/hill-a/stable-baselines
 
-# Agents
+## Agents
 
 The following agents have been implemented and documented:
 - DDPG - Deep Deterministic Policy Gradients
