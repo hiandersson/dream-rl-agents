@@ -1,7 +1,7 @@
 
 <img src="Documentation/Logo2.png" width=65% align="middle"/>
-
-
++
++
 
 ## What is Dream RL Agents?
 - An open source library for deep reinforcement learning agents
