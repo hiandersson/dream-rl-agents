@@ -1,7 +1,7 @@
 
 <img src="Documentation/Logo1.png" width=45% align="middle"/>
 
-## What is Dream RL Agents?
+#### What is Dream RL Agents?
 - An open source library for deep reinforcement learning agents
 - Code and articles written to be easy to understand and learn from
 - Implements Deep Q Learning, Deep Deterministic Policy Gradients and Proximal Policy Optimization
