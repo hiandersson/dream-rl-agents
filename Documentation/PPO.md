@@ -96,7 +96,7 @@ The way to make the ratio stay close to 1 and make the approximation hold is to 
 
 #### A trained agent
 
-![Trained agent](/Checkpoints/cartpole_v1_enjoy.gif)
+![Trained agent](/Checkpoints/pongdeterministic-v4_train.gif)
 
 #### Hyper parameters for training
 
