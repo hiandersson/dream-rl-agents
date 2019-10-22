@@ -1,5 +1,5 @@
 
-<img src="Documentation/Logo2.png" width=45%/>
+<img src="Documentation/Logo2.png" width=60%/>
 
 ### What is this?
 - An open source library for deep reinforcement learning agents
