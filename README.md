@@ -1,4 +1,5 @@
-# Dream RL Agents
+[Logo](/Documentation/Logo1.png)
+
 ## What is Dream RL Agents?
 - An open source library for deep reinforcement learning agents
 - Code and articles written to be easy to understand and learn from
