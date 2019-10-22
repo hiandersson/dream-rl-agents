@@ -1,5 +1,5 @@
 
-<img src="Documentation/Logo1.png" width=45% align="right"/>
+<img src="Documentation/Logo1.png" width=45%/>
 
 ## What is Dream RL Agents?
 - An open source library for deep reinforcement learning agents
