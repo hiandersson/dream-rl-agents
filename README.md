@@ -1,3 +1,6 @@
+
+<img src="Documentation/Logo2.png" width=25% align="left" />
+
 ![Logo](/Documentation/Logo2.png)
 
 ## What is Dream RL Agents?
