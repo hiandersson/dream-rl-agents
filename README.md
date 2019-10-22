@@ -1,13 +1,13 @@
 
 <img src="Documentation/Logo1.png" width=45%/>
 
-## What is Dream RL Agents?
+## What is this?
 - An open source library for deep reinforcement learning agents
 - Code and articles written to be easy to understand and learn from
 - "Solves" OpenAI's gym environments in example files
 - Not meant for production, may contain subtle bugs. Use stable-baselines instead https://github.com/hill-a/stable-baselines
 
-## Agents
+# Agents
 
 The following agents have been implemented and documented:
 - DDPG - Deep Deterministic Policy Gradients
